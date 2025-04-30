@@ -1,0 +1,51 @@
+﻿
+
+@* BOOKING TABLE *@
+<table class="table-container">
+
+    @* TABLE HEAD *@
+    <thead class="table-head-bookings">
+        <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Event</th>
+            <th>Ticket Category</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+
+    @* TABLE BODY *@
+    <tbody class="table-body-bookings">
+        <tr>
+            <td class="table-first-column">
+                <div class="text-date">{date}</div>
+                <div class="text-time">{Time}</div>
+            </td>
+            <td>
+                <div class="text-name">{user.Name}</div>
+            </td>
+            <td>
+                <div class="text-event-name">{event.Name}</div>
+                <div class="text-event-type">{event.Type?}</div>
+            </td>
+            <td>
+                <div class="ticket-category-tag">
+                    <div class="ticket-category-ellipse"></div>
+                    <div class="text-ticket-category">{event?.ticketCategory}</div>
+                </div>
+            </td>
+            <td>
+                <div class="text-price">{event.ticketCategory.Price}</div>
+            </td>
+            <td>
+                <div class="text-qty">{booking.ticketQty}</div>
+            </td>
+            <td class="table-last-column">
+                <div class="text-amount">{..Price * ..Amount}</div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

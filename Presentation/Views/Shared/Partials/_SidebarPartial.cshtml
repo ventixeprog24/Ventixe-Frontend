@@ -1,0 +1,31 @@
+﻿<div class="sidebar">
+
+    @* LOGOTYPE *@
+    <a class="logotype" href="">
+        <img src="~/images/logotype-symbol.svg" alt="Logo" class="logo" />
+        <span class="Ventixe-text">Ventixe</span>
+    </a>
+
+    @* SIDEBAR NAVIGATION *@
+    <nav class="nav-links">
+
+        @* DASHBOARD NAVLINK *@
+        <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
+            <div class="navlink-left-rectangle"></div>
+            <img class="nav-icon" src="~/images/dashboard-icon.svg" alt="dashboard-icon"/>
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
+                <span>Dashboard</span>
+            </a>
+        </div>
+
+        @* BOOKINGS NAVLINK *@
+        <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")">
+            <div class="navlink-left-rectangle"></div>
+            <img class="nav-icon" src="~/images/booking-icon.svg" alt="booking-icon"/>
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")" asp-controller="Booking" asp-action="Index">
+                <span>Bookings</span>
+            </a>
+        </div>
+
+    </nav>
+</div>

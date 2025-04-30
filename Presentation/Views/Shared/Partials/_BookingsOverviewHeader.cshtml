@@ -1,0 +1,35 @@
+﻿<header class="header bookings-overview">
+    @* LEFT-SIDE*@
+    <div class="segment-wrapper">
+        <button class="segment-btn all-btn active">All</button>
+        <button class="segment-btn cancelled-btn">Cancelled?</button>
+    </div>
+
+    @* RIGHT-SIDE *@
+    <div class="right-section">
+
+        @* SEARCH-INPUT *@
+        <div class="search-wrapper">
+            <input class="search-input bookings-overview" type="text" placeholder="Search name, event, etc">
+            <img class="search-icon" src="~/images/search-icon.svg" alt="search-icon">
+        </div>
+    </div>
+
+    @* ALL & CANCELLED BUTTON ACTIVE SCRIPT *@
+    <script>
+        const allBtn = document.querySelector('.all-btn');
+        const cancelledBtn = document.querySelector('.cancelled-btn');
+
+        allBtn.addEventListener('click', () =>
+        {
+            allBtn.classList.add('active');
+            cancelledBtn.classList.remove('active');
+        });
+
+        cancelledBtn.addEventListener('click', () =>
+        {
+            cancelledBtn.classList.add('active');
+            allBtn.classList.remove('active');
+        });
+    </script>
+</header>
