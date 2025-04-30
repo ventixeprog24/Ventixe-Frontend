@@ -2,11 +2,12 @@
 
 namespace Presentation.Controllers
 {
-    public class HomeController : Controller
+    public class BookingController : Controller
     {
+        [Route("Home/bookings")]
         public IActionResult Index()
         {
-            ViewData["Title"] = "Dashboard";
+            ViewData["Title"] = "Bookings";
             return View();
         }
     }
