@@ -3,6 +3,8 @@
 :root {
     --font: "Inter", sans-serif;
     --cool-gray-10: #EEEFFF;
+    --cool-gray-20: #E4E5F5;
+    --cool-gray-30: #DDDEED;
     --cool-gray-40: #D1D2E0;
     --gray-10: #FFFFFF;
     --gray-20: #F7F7F7;
@@ -49,18 +51,24 @@ html, body {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
     width: 100%;
+    flex-grow: 1;
     grid-area: main;
+    overflow: hidden;
 }
 
 /* SIDEBAR */
 .sidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
     background: var(--cool-gray-10);
     height: 100vh;
-    padding: 2rem 3rem;
+    padding: 2rem 1rem;
     margin-bottom: 1rem;
     border-radius: 1rem;
-    grid-area: sidebar;
 }
 
 .logo {
@@ -76,11 +84,15 @@ main {
     color: var(--text-color);
     text-decoration: none;
     margin-bottom: 3rem;
+    margin-left: 2rem;
 }
 
 .nav-links {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    padding-left: 2rem;
+    padding-right: 2rem;
     gap: 1rem;
     appearance: none;
 }
@@ -101,14 +113,14 @@ main {
         font-weight: 600;
     }
 
-    .nav-link.location-dashboard {
+    .nav-link.location-first {
         color: var(--pink-100);
         font-size: 14px;
         font-weight: 400;
         margin-left: 0;
     }
 
-    .nav-link.location-bookings {
+    .nav-link.location-second {
         color: var(--gray-70);
         font-size: 14px;
         font-weight: 400;
@@ -142,6 +154,31 @@ main {
     height: 30px;
 }
 
+.signout-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--cool-gray-20);
+    border: none;
+    border-radius: 1rem;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 2rem;
+    padding-right: 3.3rem;
+    margin-top: auto;
+}
+
+    .signout-btn:hover {
+        background-color: var(--cool-gray-30);
+        transition: background-color 0.3s ease;
+    }
+
+.signout-text {
+    font-size: 18px;
+    color: var(--secondary-100);
+}
 
 
 /* HEADER */
@@ -285,7 +322,6 @@ main {
     justify-content: space-between;
     background-color: var(--gray-20);
     border-radius: 1rem;
-    margin-top: 1rem;
     margin-bottom: 1rem;
     padding: 1.5rem;
 }
@@ -324,6 +360,7 @@ main {
 .booking-container {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: 1rem;
     margin-top: 1rem;
     padding: 1.5rem;
@@ -332,8 +369,11 @@ main {
 }
 
 .booking-overview {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     background-color: var(--gray-10);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 1rem;
 }
 
@@ -350,7 +390,7 @@ main {
 }
 
 .segment-btn {
-    height: 40px;
+    height: 100%;
     padding: 0.2rem 1rem;
     background-color: var(--cool-gray-10);
     color: var(--gray-100);
@@ -374,6 +414,7 @@ main {
 }
 
 .footer-overview {
+    margin-top: auto;
     padding: 1rem 0.5rem;
 }
 

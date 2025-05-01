@@ -1,15 +1,13 @@
 ﻿<header class="header">
     @* HEADLINE LEFT-SIDE*@
     <div class="headline-wrapper">
-        @* <h4>Dashboard</h4> *@
-        @* <p>Hello {user.Name}, welcome back!</p> *@
         <div class="location-path-wrapper">
-            <a class="nav-link location-dashboard @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
+            <a class="nav-link location-first @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
                 <span>Dashboard</span>
-            </a>       
+            </a>
             <span class="separator">/</span>
-            <a class="nav-link location-bookings @(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")" asp-controller="Booking" asp-actions="Index">
-                <span>Bookings</span>
+            <a class="nav-link location-second @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="Invoice" asp-actions="Index">
+                <span>Invoices</span>
             </a>
 
         </div>
@@ -51,3 +49,4 @@
         </div>
     </div>
 </header>
+

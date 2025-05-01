@@ -9,10 +9,11 @@
     @* SIDEBAR NAVIGATION *@
     <nav class="nav-links">
 
+
         @* DASHBOARD NAVLINK *@
         <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
             <div class="navlink-left-rectangle"></div>
-            <img class="nav-icon" src="~/images/dashboard-icon.svg" alt="dashboard-icon"/>
+            <img class="nav-icon" src="~/images/dashboard-icon.svg" alt="dashboard-icon" />
             <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
                 <span>Dashboard</span>
             </a>
@@ -21,11 +22,44 @@
         @* BOOKINGS NAVLINK *@
         <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")">
             <div class="navlink-left-rectangle"></div>
-            <img class="nav-icon" src="~/images/booking-icon.svg" alt="booking-icon"/>
+            <img class="nav-icon" src="~/images/booking-icon.svg" alt="booking-icon" />
             <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")" asp-controller="Booking" asp-action="Index">
                 <span>Bookings</span>
             </a>
         </div>
 
+        @* EVENTS NAVLINK *@
+        <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Event" ? "active" : "")">
+            <div class="navlink-left-rectangle"></div>
+            <img class="nav-icon" src="~/images/event-ticket-icon.svg" alt="event-ticket-icon" />
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Event" ? "active" : "")" asp-controller="Event" asp-action="Index">
+                <span>Events</span>
+            </a>
+        </div>   
+
+        @* INVOICE NAVLINK *@
+        <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")">
+            <div class="navlink-left-rectangle"></div>
+            <img class="nav-icon" src="~/images/invoice-icon.svg" alt="event-ticket-icon" />
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="Invoice" asp-action="Index">
+                <span>Invoices</span>
+            </a>
+        </div>
+
+
+
+
     </nav>
+    <footer>
+    @* SIGNOUT BUTTON *@
+    <button class="signout-btn">
+        <div class="btn-icon-wrapper">
+            <img class="nav-icon" src="~/images/signout-icon.svg" alt="signout-icon">
+        </div>
+        <div class="signout-text">Sign Out</div>
+    </button>
+
+    </footer>
 </div>
+
+
