@@ -1,7 +1,10 @@
+using Application.Handlers;
+using Application.Services;
 using Authentication.Contexts;
 using Authentication.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UserProfileServiceClient = UserProfileService.UserProfileService.UserProfileServiceClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,13 +12,22 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<IdentityUserDbContext>(x =>
     x.UseSqlServer(builder.Configuration.GetConnectionString("VentixeIdentityDb")));
-builder.Services.AddIdentity<AppUser, IdentityRole>(x =>
+builder.Services.AddIdentity<AppUserEntity, IdentityRole>(x =>
 {
     x.SignIn.RequireConfirmedAccount = true;
     x.Password.RequiredLength = 8;
     x.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<IdentityUserDbContext>().AddDefaultTokenProviders();
 //Configure application cookie here
+
+//Configuring the external UserProfileService
+builder.Services.AddGrpcClient<UserProfileServiceClient>(o =>
+{
+    o.Address = new Uri(builder.Configuration["Grpc:UserProfileService"]!);
+});
+
+builder.Services.AddScoped<RoleHandler>();
+builder.Services.AddScoped<AccountService>();
 
 var app = builder.Build();
 
