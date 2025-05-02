@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{339D0C2D-2F6F-4557-98A7-4FF2DB8BF4CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{92076DFD-EDF2-4E19-A4C5-E4C156EE8F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{D9221EFB-11BF-4FCE-AE69-31A4A9313B8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{339D0C2D-2F6F-4557-98A7-4FF2DB8BF4CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{339D0C2D-2F6F-4557-98A7-4FF2DB8BF4CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{339D0C2D-2F6F-4557-98A7-4FF2DB8BF4CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92076DFD-EDF2-4E19-A4C5-E4C156EE8F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92076DFD-EDF2-4E19-A4C5-E4C156EE8F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92076DFD-EDF2-4E19-A4C5-E4C156EE8F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92076DFD-EDF2-4E19-A4C5-E4C156EE8F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9221EFB-11BF-4FCE-AE69-31A4A9313B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9221EFB-11BF-4FCE-AE69-31A4A9313B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9221EFB-11BF-4FCE-AE69-31A4A9313B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9221EFB-11BF-4FCE-AE69-31A4A9313B8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
