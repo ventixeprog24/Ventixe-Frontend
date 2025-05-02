@@ -25,7 +25,7 @@ namespace Presentation.Controllers
                 return View(model);
             }
 
-            var doesUsernameExist = await _accountService.FindByEmailAsync(model.Email);
+            var doesUsernameExist = await _accountService.DoesUsernameExistAsync(model.Email);
             if (doesUsernameExist.Succeeded)
             {
                 ViewBag.ErrorMessage = "User already exists";

@@ -14,7 +14,7 @@ namespace Application.Services
         private readonly UserManager<AppUserEntity> _userManager = userManager;
         private readonly RoleHandler _roleHandler = roleHandler;
 
-        public async Task<AccountServiceResult> FindByEmailAsync(string email)
+        public async Task<AccountServiceResult> DoesUsernameExistAsync(string email)
         {
             var doesUsernameExist = await _context.Users.AnyAsync(u => u.UserName == email);
             return doesUsernameExist
