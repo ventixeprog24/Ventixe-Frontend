@@ -2,7 +2,7 @@
 
 namespace Authentication.Entities
 {
-    public class AppUser : IdentityUser
+    public class AppUserEntity : IdentityUser
     {
     }
 }
