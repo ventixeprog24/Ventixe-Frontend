@@ -1,7 +1,7 @@
 ﻿using Authentication.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace Application.Handlers
+namespace Authentication.Handlers
 {
     //Gör interface för detta
     public class RoleHandler(UserManager<AppUserEntity> userManager)

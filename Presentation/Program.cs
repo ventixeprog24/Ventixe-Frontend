@@ -1,5 +1,5 @@
-using Application.Handlers;
-using Application.Services;
+using Authentication.Handlers;
+using Authentication.Services;
 using Authentication.Contexts;
 using Authentication.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -28,7 +28,7 @@ builder.Services.AddGrpcClient<UserProfileServiceClient>(o =>
 });
 
 builder.Services.AddScoped<RoleHandler>();
-builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<AuthService>();
 
 var app = builder.Build();
 

@@ -1,8 +1,8 @@
-﻿using Application.Dtos;
+﻿using Authentication.Dtos;
 using Authentication.Entities;
 using UserProfileServiceProvider;
 
-namespace Application.Factories
+namespace Authentication.Factories
 {
     public class AccountFactory
     {

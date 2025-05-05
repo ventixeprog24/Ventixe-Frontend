@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.30.2" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.71.0" />
+    <PackageReference Include="grpc.tools" Version="2.71.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="microsoft.aspnetcore.identity" Version="2.3.1" />
     <PackageReference Include="microsoft.aspnetcore.identity.entityframeworkcore" Version="9.0.4" />
     <PackageReference Include="microsoft.entityframeworkcore.design" Version="9.0.4">
@@ -22,6 +29,10 @@
 
   <ItemGroup>
     <Folder Include="Database\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\userprofile.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>
