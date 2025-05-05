@@ -6,15 +6,15 @@ namespace Authentication.Factories
 {
     public class AccountFactory
     {
-        public static AppUserEntity? ToAppUserEntity(SignUpFormDto formData)
+        public static AppUserEntity? ToAppUserEntity(string email)
         {
-            if (formData is null)
+            if (string.IsNullOrWhiteSpace(email))
                 return null;
 
             AppUserEntity appUser = new()
             {
-                UserName = formData.Email,
-                Email = formData.Email
+                UserName = email,
+                Email = email
             };
 
             return appUser;
