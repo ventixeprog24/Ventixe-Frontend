@@ -1,22 +1,22 @@
 ﻿using Application.Dtos;
 using Application.Factories;
 using Application.Handlers;
-using Authentication.Contexts;
 using Authentication.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Services
 {
-    public class AccountService(IdentityUserDbContext context, UserManager<AppUserEntity> userManager, RoleHandler roleHandler)
+    //Gör interface för detta.
+    public class AccountService(UserManager<AppUserEntity> userManager, RoleHandler roleHandler)
     {
-        private readonly IdentityUserDbContext _context = context;
         private readonly UserManager<AppUserEntity> _userManager = userManager;
         private readonly RoleHandler _roleHandler = roleHandler;
 
         public async Task<AccountServiceResult> DoesUsernameExistAsync(string email)
         {
-            var doesUsernameExist = await _context.Users.AnyAsync(u => u.UserName == email);
+
+            var doesUsernameExist = await _userManager.Users.AnyAsync(u => u.UserName == email);
             return doesUsernameExist
                 ? new AccountServiceResult { Succeeded = true }
                 : new AccountServiceResult { Succeeded = false };
@@ -24,7 +24,7 @@ namespace Application.Services
 
         public async Task<AccountServiceResult> SignUpAsync(SignUpFormDto formData)
         {
-            var appUser = AccountFactory.ToEntity(formData);
+            var appUser = AccountFactory.ToAppUserEntity(formData);
 
             if (appUser is null)
                 return new AccountServiceResult { Succeeded = false, Message = "Could not convert to AppUserEntity"};

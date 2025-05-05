@@ -1,5 +1,28 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SignUpViewModel
+
 @{
+    ViewData["Title"] = "Create account";
+    Layout = "_AuthLayout";
 }
+
+<section class="card">
+    <div class="card-header">
+        <h1>Enter your email address</h1>
+        <p>
+            @ViewBag.ErrorMessage
+        </p>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Index" asp-controller="SignUp" novalidate>
+            <div class="form-group">
+                <input asp-for="Email" class="form-input" />
+            </div>
+            <button type="submit" class="btn-submit"></button>
+        </form>
+    </div>
+    <div class="card-footer">
+        <div>
+            Do you already have an account? <a asp-action="Index" asp-controller="Login" class="nav-link">Log in</a>
+        </div>
+    </div>
+</section>

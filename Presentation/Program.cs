@@ -4,7 +4,8 @@ using Authentication.Contexts;
 using Authentication.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using UserProfileServiceClient = UserProfileService.UserProfileService.UserProfileServiceClient;
+using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
