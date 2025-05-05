@@ -1,4 +1,4 @@
-﻿namespace Application.Dtos
+﻿namespace Authentication.Dtos
 {
     public class SignUpFormDto
     {

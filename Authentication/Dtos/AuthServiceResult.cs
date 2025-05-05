@@ -1,6 +1,6 @@
-﻿namespace Application.Dtos
+﻿namespace Authentication.Dtos
 {
-    public class AccountServiceResult
+    public class AuthServiceResult
     {
         public bool Succeeded { get; set; }
         public string? Message { get; set; }
