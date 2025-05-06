@@ -1,14 +1,18 @@
 ﻿using Authentication.Services;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Helpers;
 using Presentation.Models.SignUp;
 using UserProfileServiceProvider;
+using VerificationServiceProvider;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
+using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
 
 namespace Presentation.Controllers
 {
-    public class SignUpController(UserProfileServiceClient userProfileService, AuthService authService) : Controller
+    public class SignUpController(UserProfileServiceClient userProfileService, VerificationServiceClient verificationServiceClient, AuthService authService) : Controller
     {
         private readonly UserProfileServiceClient _userProfileService = userProfileService;
+        private readonly VerificationServiceClient _verificationService = verificationServiceClient;
         private readonly AuthService _authService = authService;
 
         #region Set email
@@ -35,7 +39,8 @@ namespace Presentation.Controllers
             }
 
             //This will send the verification code
-            var verificationResponse = await _verificationService.SendVerificationCodeAsync(model.Email);
+            var verificationResponse =await _verificationService.SendVerificationCodeAsync(
+                new SendVerificationCodeRequest { Email = model.Email });
             if (!verificationResponse.Succeeded)
             {
                 ViewBag.ErrorMessage = verificationResponse.Error;
@@ -49,22 +54,52 @@ namespace Presentation.Controllers
 
         #region Account verification
         [HttpGet("account-verification")]
-        public IActionResult AccountVerification()
+        public IActionResult AccountVerification(string? email, string? token)
         {
+            var tempEmail = TempData["Email"]?.ToString();
+            bool emailInQuery = !string.IsNullOrWhiteSpace(email);
+            bool tokenInQuery = !string.IsNullOrWhiteSpace(token);
+
+            if (!emailInQuery && !string.IsNullOrWhiteSpace(tempEmail))
+                email = tempEmail;
+
+            if (!emailInQuery && !tokenInQuery)
+                return RedirectToAction("Index");
+
+            if (tokenInQuery)
+            {
+                var validateResponse = _verificationService.ValidateVerificationToken(
+                    new ValidateVerificationTokenRequest { Email = email, Token = token });
+                if (!validateResponse.Succeeded)
+                {
+                    ViewBag.ErrorMessage = "Invalid or expired verification link";
+                    return RedirectToAction("Index");
+                }
+
+                TempData["Email"] = email;
+            }
+
+            ViewBag.Email = EmailFormatter.MaskEmail(email!);
+            TempData.Keep("Email");
+
             return View();
         }
 
         [HttpPost("account-verification")]
-        public async Task<IActionResult> AccountVerification(AccountVerificationViewModel model)
+        public IActionResult AccountVerification(AccountVerificationViewModel model)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.ErrorMessage = "Invalid or expired verification code.";
                 return View(model);
+            }
 
-            var email = TempData["Email"].ToString();
+            var email = TempData["Email"]?.ToString();
             if (string.IsNullOrWhiteSpace(email))
                 return RedirectToAction("Index");
 
-            var validateResponse = await _verificationService.ValidateCodeAsync(email, model.VerificationCode);
+            var validateResponse = _verificationService.ValidateVerificationCode(
+                new ValidateVerificationCodeRequest { Email = email, Code = model.VerificationCode });
             if (!validateResponse.Succeeded)
             {
                 ViewBag.ErrorMessage = validateResponse.Error;
@@ -92,7 +127,7 @@ namespace Presentation.Controllers
                 TempData.Keep("Email");
                 return View(model);
             }
-            
+
             var email = TempData["Email"]?.ToString();
             if (string.IsNullOrWhiteSpace(email))
                 return RedirectToAction(nameof(Index));
@@ -111,7 +146,6 @@ namespace Presentation.Controllers
         #endregion Set Password
 
         #region Set Profile Information
-
         [HttpGet("profile-information")]
         public IActionResult ProfileInformation()
         {
