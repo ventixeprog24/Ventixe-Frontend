@@ -23,7 +23,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<IActionResult> Index(SetEmailViewModel model)
+        public async Task<IActionResult> Index(SignUpViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -179,7 +179,7 @@ namespace Presentation.Controllers
             switch (result.StatusCode)
             {
                 case 201:
-                //return RedirectToAction("Index", "Login");
+                    return RedirectToAction("Index", "Login");
                 case 500:
                     ViewBag.ErrorMessage = "Internal server error.";
                     TempData.Keep("Email");
