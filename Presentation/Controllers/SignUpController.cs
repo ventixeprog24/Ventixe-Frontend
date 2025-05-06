@@ -23,11 +23,10 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<IActionResult> Index(SignUpViewModel model)
+        public async Task<IActionResult> Index(SetEmailViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.ErrorMessage = "Invalid email address";
                 return View(model);
             }
 
@@ -180,7 +179,7 @@ namespace Presentation.Controllers
             switch (result.StatusCode)
             {
                 case 201:
-                    return RedirectToAction("Index", "Login");
+                //return RedirectToAction("Index", "Login");
                 case 500:
                     ViewBag.ErrorMessage = "Internal server error.";
                     TempData.Keep("Email");
