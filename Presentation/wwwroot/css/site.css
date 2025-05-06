@@ -20,6 +20,34 @@
     --pink-100: #F26CF9;
     --secondary-100: #37437D;
     --secondary-90: #5562A2;
+    /* ---------------- */
+    --red-light: rgba(255, 234, 228, 0.5);
+    --red-dark: #B83030;
+    --primary-100: #F26CF9;
+    --primary-90: #F589FA;
+    --link-color: var(--primary-100);
+    --link-hover-color: var(--primary-90);
+    --card-border-color: var(--gray-20);
+    --text-color: var(--gray-100);
+    --background-color: var(--gray-10);
+    --headline-color: var(--secondary-100);
+    --input-text-color: var(--gray-100);
+    --input-border-color: var(--gray-40);
+    --text-muted-color: var(--gray-60);
+    --main-background-color: var( --gray-20);
+    --input-background-color: var(--gray-10);
+    --card-background-color: var(--gray-10);
+    --form-error-message-text-color: var(--red-light);
+    --form-error-message-background-color: var(--red-light);
+    --button-text-color: var(--gray-90);
+    --button-border-color: transparent;
+    --button-background-color: transparent;
+    --button-primary-text-color: var(--gray-10);
+    --button-primary-border-color: var(--primary-100);
+    --button-primary-background-color: var(--primary-100);
+    --button-primary-hover-text-color: var(--gray-10);
+    --button-primary-hover-border-color: var(--primary-90);
+    --button-primary-hover-background-color: var(--primary-90);
 }
 
 *, *::after.before, *::after {
@@ -50,13 +78,20 @@ html, body {
     gap: 1rem;
 }
 
-main {
+/*main {
     display: flex;
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
     grid-area: main;
     overflow: hidden;
+}*/
+
+main {
+    grid-area: main;
+    background-color: var(--main-background-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
 }
 
 /* SIDEBAR */
@@ -525,3 +560,194 @@ main {
     font-size: 15px;
     color: var(--gray-100);
 }
+
+
+
+
+
+/*  */
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--headline-color);
+    font-family: var(--font);
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 26px;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+h5 {
+    font-size: 22px;
+}
+
+h6 {
+    font-size: 20px;
+}
+
+/* Links */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--link-hover-color);
+        text-decoration: underline;
+    }
+
+/* Buttons */
+.btn {
+    color: var(--button-text-color);
+    border: 1px solid var(--button-border-color);
+    background-color: var(--button-background-color);
+    transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    border-radius: 25px;
+    padding: 0.9rem 1.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+    .btn:hover {
+        text-decoration: none;
+        color: var(--button-text-color);
+        border: 1px solid var(--button-border-color);
+        background-color: var(--button-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    }
+
+.btn-primary {
+    color: var(--button-primary-text-color);
+    border: 1px solid var(--button-primary-border-color);
+    background-color: var(--button-primary-background-color);
+}
+
+    .btn-primary:hover {
+        color: var(--button-primary-hover-text-color);
+        border: 1px solid var(--button-primary-hover-border-color);
+        background-color: var(--button-primary-hover-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+    }
+
+/* Cards */
+.card {
+    background-color: var(--card-background-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    width: 100%;
+    border: 1px solid var(--gray-30);
+}
+
+    .card .card-header {
+        padding: 1rem 2rem 1rem;
+    }
+
+    .card card-title {
+    }
+
+    .card .card-body {
+        padding: 1rem 2rem;
+    }
+
+    .card .card-footer {
+        padding: 2rem 2rem 1rem;
+    }
+
+
+/* Forms */
+.form-group {
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+    .form-group .additional-info {
+        font-size: 0.7em;
+    }
+
+.form button[type="submit"] {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.additional-info {
+    padding: 0 1rem;
+    font-size: 0.9em;
+    color: var(--text-muted-color);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+    .additional-info.center {
+        justify-content: center;
+    }
+
+    .additional-info.right {
+        justify-content: flex-end;
+    }
+
+.verification-code-wrapper {
+    display: grid;
+    margin-top: 0.2rem;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.verification-code-input {
+    font-size: 1.6em;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    border-radius: 12px;
+    outline: none;
+    color: var(--input-text-color);
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-background-color);
+}
+
+.validation-error-message {
+    color: var(--form-error-message-text-color);
+    background-color: var(--form-error-message-background-color);
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding: 0.6rem;
+    border-radius: 10px;
+}
+
+#signup {
+    width: 600px;
+    text-align: center;
+}
+
+    #signup.card .card-body {
+        padding: 0 3rem;
+    }
+
+    #signup .form-alreadyhaveaccount {
+        font-size: 0.9em;
+        color: var(--text-muted-color);
+    }

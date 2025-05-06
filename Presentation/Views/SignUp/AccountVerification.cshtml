@@ -1,8 +1,69 @@
 ﻿@model AccountVerificationViewModel;
 
 @{
-    ViewData["Title"] = "Verify account";
+    ViewData["Title"] = "Verify Your Email Address";
     Layout = "_AuthLayout";
 }
 
+<div id="signup" class="card">
+	<div class="card-header">
+		<h2 class="card-title">Verify Your Email Address</h2>
+		<p class="additional-info">An email with a verification code was sent to @ViewBag.MaskedEmail. Please enter the code below to verify your email address.</p>
+		<p class="validation-error-message">@ViewBag?.ErrorMessage</p>
+	</div>
+	<div class="card-body">
+		<form method="post" asp-action="AccountVerification" asp-controller="SignUp" novalidate>
+			<input type="hidden" asp-for="VerificationCode" />
+			<div class="form-group">
+				<div class="additional-info right"><a asp-action="Index" asp-controller="SignUp">Go back</a></div> @*Resend verification code?*@
 
+				<div class="form-group verification-code-wrapper">
+					@for (int i = 0; i < 6; i++)
+					{
+						<input type="text" maxlength="1" class="verification-code-input" id="box-@i" />
+					}
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Verify Code & Continue</button>
+		</form>
+	</div>
+	<div class="card-footer">
+		<div class="form-alreadyhaveaccount">
+			Already have an account? <a asp-action="Index" asp-controller="Loginp">Log In</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const boxes = document.querySelectorAll(".verification-code-input");
+		const hiddenInput = document.querySelector("input[name='VerificationCode']");
+		const digitOnlyRegExp = /^[0-9]$/;
+		boxes[0].focus();
+
+		boxes.forEach((box, index) => {
+
+			box.addEventListener("input", function (e) {
+				const value = box.value;
+				if (!digitOnlyRegExp.test(value)) {
+					box.value = "";
+					return;
+				}
+			});
+
+			box.addEventListener("input", function () {
+				if (box.value.length === 1 && index < boxes.length - 1) {
+					boxes[index + 1].focus();
+				}
+				hiddenInput.value = Array.from(boxes).map(box => box.value).join("");
+			});
+
+			box.addEventListener("keydown", function (e) {
+				if (e.key === "Backspace" && box.value.length === 0 && index > 0) {
+					boxes[index - 1].focus();
+				}
+			});
+
+		});
+	});
+</script>
