@@ -5,7 +5,7 @@ using Authentication.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
-
+using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +25,11 @@ builder.Services.AddIdentity<AppUserEntity, IdentityRole>(x =>
 builder.Services.AddGrpcClient<UserProfileServiceClient>(o =>
 {
     o.Address = new Uri(builder.Configuration["Grpc:UserProfileService"]!);
+});
+
+builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
+{
+    o.Address = new Uri(builder.Configuration["Grpc:VerificationServiceProvider"]!);
 });
 
 builder.Services.AddScoped<RoleHandler>();

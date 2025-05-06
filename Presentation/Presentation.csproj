@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Authentication\Authentication.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Protobuf Include="Protos\verification.proto" GrpcServices="Client" />
+	</ItemGroup>
+
 </Project>
