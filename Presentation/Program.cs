@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
+using Presentation.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,9 @@ builder.Services.AddScoped<RoleHandler>();
 builder.Services.AddScoped<AuthService>();
 
 var app = builder.Build();
+
+//Uncomment and start app to create roles in the database. 
+//await SeedData.SetRolesAsync(app);
 
 app.UseHsts();
 app.UseHttpsRedirection();

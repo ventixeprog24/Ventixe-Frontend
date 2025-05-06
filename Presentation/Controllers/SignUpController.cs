@@ -23,7 +23,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<IActionResult> Index(SignUpViewModel model)
+        public async Task<IActionResult> Index(SetEmailViewModel model)
         {
             if (!ModelState.IsValid)
             {
