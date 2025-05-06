@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Helpers;
 using Presentation.Models.SignUp;
+using UserProfileServiceProvider;
 using VerificationServiceProvider;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
@@ -26,7 +27,6 @@ namespace Presentation.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.ErrorMessage = "Invalid email address";
                 return View(model);
             }
 
@@ -38,7 +38,7 @@ namespace Presentation.Controllers
             }
 
             //This will send the verification code
-            var verificationResponse = await _verificationService.SendVerificationCodeAsync(
+            var verificationResponse =await _verificationService.SendVerificationCodeAsync(
                 new SendVerificationCodeRequest { Email = model.Email });
             if (!verificationResponse.Succeeded)
             {
@@ -109,17 +109,89 @@ namespace Presentation.Controllers
             TempData["Email"] = email;
             return RedirectToAction("SetPassword");
         }
-
         #endregion Account verification
 
         #region Set Password
-
         [HttpGet("set-password")]
         public IActionResult SetPassword()
         {
             return View();
         }
 
+        [HttpPost("set-password")]
+        public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData.Keep("Email");
+                return View(model);
+            }
+
+            var email = TempData["Email"]?.ToString();
+            if (string.IsNullOrWhiteSpace(email))
+                return RedirectToAction(nameof(Index));
+
+            var result = await _authService.SignUpAsync(email, model.Password);
+            if (!result.Succeeded)
+            {
+                TempData.Keep("Email");
+                return View(model);
+            }
+
+            TempData.Keep("Email");
+            TempData["UserId"] = result.UserId;
+            return RedirectToAction("ProfileInformation");
+        }
         #endregion Set Password
+
+        #region Set Profile Information
+        [HttpGet("profile-information")]
+        public IActionResult ProfileInformation()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> ProfileInformation(SetProfileInformationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData.Keep("Email");
+                TempData.Keep("UserId");
+                return View(model);
+            }
+
+            var email = TempData["Email"]?.ToString();
+            var userId = TempData["UserId"]?.ToString();
+
+            UserProfile userProfile = new()
+            {
+                UserId = userId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = email,
+                PhoneNumber = model.PhoneNumber,
+                Address = model.Address,
+                PostalCode = model.PostalCode,
+                City = model.City
+            };
+
+            var result = _userProfileService.CreateUserProfile(userProfile);
+            switch (result.StatusCode)
+            {
+                case 201:
+                    return RedirectToAction("Index", "Login");
+                case 500:
+                    ViewBag.ErrorMessage = "Internal server error.";
+                    TempData.Keep("Email");
+                    TempData.Keep("UserId");
+                    return View(model);
+                default:
+                    ViewBag.ErrorMessage = "Bad Request. Try again.";
+                    TempData.Keep("Email");
+                    TempData.Keep("UserId");
+                    return View(model);
+            }
+        }
+        #endregion Set Profile Information
     }
 }

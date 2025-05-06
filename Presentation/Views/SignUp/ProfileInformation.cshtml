@@ -1,0 +1,56 @@
+﻿@model SetProfileInformationViewModel
+@{
+    ViewData["Title"] = "Set Profile Information";
+    Layout = "_AuthLayout";
+}
+
+<section class="card-signup">
+    <div class="card-signup-header">
+        <h1>Set your Profile information.</h1>
+        <p class="additional-info">When you have created your profile you will be redirected to the login page.</p>
+        <p>
+            @ViewBag.ErrorMessage
+        </p>
+    </div>
+    <div class="class-signup-body">
+        <form method="post" asp-action="ProfileInformation" asp-controller="SignUp" novalidate>
+            <label asp-for="FirstName"></label>
+            <div class="form-group">
+                <input asp-for="FirstName" class="form-input"/>
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <label asp-for="LastName"></label>
+            <div class="form-group">
+                <input asp-for="LastName" class="form-input"/>
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <label asp-for="PhoneNumber"></label>
+            <div class="form-group">
+                <input asp-for="PhoneNumber" class="form-input"/>
+                <span asp-validation-for="PhoneNumber"></span>
+            </div>
+            <label asp-for="Address"></label>
+            <div class="form-group">
+                <input asp-for="Address" class="form-input"/>
+                <span asp-validation-for="Address"></span>
+            </div>
+            <label asp-for="PostalCode"></label>
+            <div class="form-group">
+                <input asp-for="PostalCode" class="form-input"/>
+                <span asp-validation-for="PostalCode"></span>
+            </div>
+            <label asp-for="City"></label>
+            <div class="form-group">
+                <input asp-for="City" class="form-input" />
+                <span asp-validation-for="City"></span>
+            </div>
+        </form>
+    </div>
+    <div class="class-footer">
+        <div class="form-alreadyhaveaccount">
+            Already have an account? <a asp-action="Index" asp-controller="Login">Log In</a>
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("_validationScripts")

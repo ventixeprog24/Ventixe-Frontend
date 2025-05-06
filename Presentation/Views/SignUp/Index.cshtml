@@ -1,28 +1,32 @@
-﻿@model SignUpViewModel
+﻿@model SetEmailViewModel
 
 @{
     ViewData["Title"] = "Create account";
     Layout = "_AuthLayout";
 }
 
-<section class="card">
-    <div class="card-header">
+<section class="card-signup">
+    <div class="card-signup-header">
         <h1>Enter your email address</h1>
-        <p>
+        <p class="field-validation-error">
             @ViewBag.ErrorMessage
         </p>
     </div>
-    <div class="card-body">
+    <div class="card-signup-body">
         <form method="post" asp-action="Index" asp-controller="SignUp" novalidate>
+            <label asp-for="Email"></label>
             <div class="form-group">
-                <input asp-for="Email" class="form-input" />
+                <input asp-for="Email" class="form-input"/>
+                <span asp-validation-for="Email"></span>
             </div>
-            <button type="submit" class="btn-submit"></button>
+            <button type="submit" class="btn btn-primary margin-button">Continue</button>
         </form>
     </div>
-    <div class="card-footer">
-        <div>
-            Do you already have an account? <a asp-action="Index" asp-controller="Login" class="nav-link">Log in</a>
+    <div class="card-signup-footer">
+        <div class="form-alreadyhaveaccount">
+            Already have an account? <a asp-action="Index" asp-controller="Login">Log In</a>
         </div>
     </div>
 </section>
+
+@await Html.PartialAsync("_validationScripts")

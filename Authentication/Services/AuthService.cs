@@ -22,18 +22,18 @@ namespace Authentication.Services
                 : new AuthServiceResult { Succeeded = false };
         }
 
-        public async Task<AuthServiceResult> SignUpAsync(SignUpFormDto formData)
+        public async Task<AuthServiceResult> SignUpAsync(string email, string password)
         {
-            var appUser = AccountFactory.ToAppUserEntity(formData);
+            var appUser = AccountFactory.ToAppUserEntity(email);
 
             if (appUser is null)
                 return new AuthServiceResult { Succeeded = false, Message = "Could not convert to AppUserEntity"};
 
-            var result = await _userManager.CreateAsync(appUser, formData.Password);
+            var result = await _userManager.CreateAsync(appUser, password);
             if (!result.Succeeded)
                 return new AuthServiceResult { Succeeded = false, Message = "Could not create user" };
 
-            var roleResult = await _roleHandler.AddToRoleAsync(appUser, formData.Role);
+            var roleResult = await _roleHandler.AddToRoleAsync(appUser,"User");
             return !result.Succeeded 
                 ? new AuthServiceResult { Succeeded = false, Message = "Could not add user to role" } 
                 : new AuthServiceResult { Succeeded = true, UserId = appUser.Id };

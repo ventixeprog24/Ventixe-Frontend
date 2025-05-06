@@ -751,3 +751,90 @@ a {
         font-size: 0.9em;
         color: var(--text-muted-color);
     }
+    
+/* FORM INPUT AND VALIDATION */
+
+.form-input {
+    width: 200px;
+    height: 48px;
+    border-radius: 15px;
+    border: 1px solid var(--gray-10);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.field-validation-error {
+    color: red;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.input-validation-error {
+    border-color: red;
+}
+
+@media (min-width: 768px) {
+    .form-input {
+        width: 300px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .form-input {
+        width: 550px;
+    }
+}
+
+/*CARDS */
+
+.card-signup {
+    width: 250px;
+    border-radius: 15px;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: var(--cool-gray-10);
+}
+
+.card-signup-header {
+    text-align: center;
+}
+
+.card-signup-body {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.card-signup-body label {
+    display: block;
+    text-align: start;
+}
+
+.card-signup-footer {
+    text-align: center;
+}
+
+.margin-button {
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .card-signup {
+        width: 400px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-signup {
+        width: 600px;
+    }
+}
