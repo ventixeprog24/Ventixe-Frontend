@@ -63,7 +63,7 @@ namespace Presentation.Controllers
                 email = tempEmail;
 
             if (!emailInQuery && !tokenInQuery)
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
 
             if (tokenInQuery)
             {
@@ -72,7 +72,7 @@ namespace Presentation.Controllers
                 if (!validateResponse.Succeeded)
                 {
                     ViewBag.ErrorMessage = "Invalid or expired verification link";
-                    return RedirectToAction("Index");
+                    return RedirectToAction(nameof(Index));
                 }
 
                 TempData["Email"] = email;
@@ -95,7 +95,7 @@ namespace Presentation.Controllers
 
             var email = TempData["Email"]?.ToString();
             if (string.IsNullOrWhiteSpace(email))
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
 
             var validateResponse = _verificationService.ValidateVerificationCode(
                 new ValidateVerificationCodeRequest { Email = email, Code = model.VerificationCode });
@@ -107,7 +107,7 @@ namespace Presentation.Controllers
             }
 
             TempData["Email"] = email;
-            return RedirectToAction("SetPassword");
+            return RedirectToAction(nameof(SetPassword));
         }
         #endregion Account verification
 
