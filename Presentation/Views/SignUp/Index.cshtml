@@ -8,9 +8,12 @@
 <section class="card-signup">
     <div class="card-signup-header">
         <h1>Enter your email address</h1>
-        <p class="field-validation-error">
-            @ViewBag.ErrorMessage
-        </p>
+        @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+        {
+            <p class="field-validation-error">
+                @ViewBag.ErrorMessage
+            </p>
+        }
     </div>
     <div class="card-signup-body">
         <form method="post" asp-action="Index" asp-controller="SignUp" novalidate>

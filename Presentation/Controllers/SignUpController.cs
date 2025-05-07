@@ -16,13 +16,13 @@ namespace Presentation.Controllers
         private readonly AuthService _authService = authService;
 
         #region Set email
-        [HttpGet("signup")]
+        [HttpGet("auth/signup")]
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost("signup")]
+        [HttpPost("auth/signup")]
         public async Task<IActionResult> Index(SetEmailViewModel model)
         {
             if (!ModelState.IsValid)
@@ -52,7 +52,7 @@ namespace Presentation.Controllers
         #endregion Set email
 
         #region Account verification
-        [HttpGet("account-verification")]
+        [HttpGet("auth/account-verification")]
         public IActionResult AccountVerification(string? email, string? token)
         {
             var tempEmail = TempData["Email"]?.ToString();
@@ -84,7 +84,7 @@ namespace Presentation.Controllers
             return View();
         }
 
-        [HttpPost("account-verification")]
+        [HttpPost("auth/account-verification")]
         public IActionResult AccountVerification(AccountVerificationViewModel model)
         {
             if (!ModelState.IsValid)
@@ -112,13 +112,13 @@ namespace Presentation.Controllers
         #endregion Account verification
 
         #region Set Password
-        [HttpGet("set-password")]
+        [HttpGet("auth/set-password")]
         public IActionResult SetPassword()
         {
             return View();
         }
 
-        [HttpPost("set-password")]
+        [HttpPost("auth/set-password")]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -145,12 +145,13 @@ namespace Presentation.Controllers
         #endregion Set Password
 
         #region Set Profile Information
-        [HttpGet("profile-information")]
+        [HttpGet("auth/profile-information")]
         public IActionResult ProfileInformation()
         {
             return View();
         }
 
+        [HttpPost("auth/profile-information")]
         public async Task<IActionResult> ProfileInformation(SetProfileInformationViewModel model)
         {
             if (!ModelState.IsValid)
@@ -175,7 +176,7 @@ namespace Presentation.Controllers
                 City = model.City
             };
 
-            var result = _userProfileService.CreateUserProfile(userProfile);
+            var result = await _userProfileService.CreateUserProfileAsync(userProfile);
             switch (result.StatusCode)
             {
                 case 201:
