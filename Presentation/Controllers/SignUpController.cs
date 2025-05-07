@@ -47,7 +47,7 @@ namespace Presentation.Controllers
             }
 
             TempData["Email"] = model.Email;
-            return RedirectToAction("AccountVerification");
+            return RedirectToAction(nameof(AccountVerification));
         }
         #endregion Set email
 
@@ -140,7 +140,7 @@ namespace Presentation.Controllers
 
             TempData.Keep("Email");
             TempData["UserId"] = result.UserId;
-            return RedirectToAction("ProfileInformation");
+            return RedirectToAction(nameof(ProfileInformation));
         }
         #endregion Set Password
 
