@@ -14,7 +14,8 @@ namespace Authentication.Factories
             AppUserEntity appUser = new()
             {
                 UserName = email,
-                Email = email
+                Email = email,
+                EmailConfirmed = true
             };
 
             return appUser;
