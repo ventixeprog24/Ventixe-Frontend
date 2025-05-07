@@ -1,11 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Questrial&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Questrial&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root {
     --font: "Inter", sans-serif;
-    --cool-gray-10: #EEEFFF;
-    --cool-gray-20: #E4E5F5;
-    --cool-gray-30: #DDDEED;
-    --cool-gray-40: #D1D2E0;
+    --primary-100: #F26CF9;
+    --primary-90: #F589FA;
+    --primary-50: #FCD3FE;
+    --primary-40: #FCE2FE;
+    --primary-30: #FDEDFE;
+    --secondary-110: #1C2346;
+    --secondary-100: #37437D;
+    --secondary-90: #5562A2;
+    --secondary-70: #707DBF;
+    --secondary-60: #707DBF;
+    --secondary-50: #D3DAF9;
+    --yellow-100: #FFCA39;
+    --yellow-90: #FFEFC3;
     --gray-10: #FFFFFF;
     --gray-20: #F7F7F7;
     --gray-30: #EDEDED;
@@ -16,39 +25,68 @@
     --gray-80: #636365;
     --gray-90: #434345;
     --gray-100: #1E1E20;
-    --pink-90: #F589FA;
-    --pink-100: #F26CF9;
-    --secondary-100: #37437D;
-    --secondary-90: #5562A2;
-    /* ---------------- */
-    --red-light: rgba(255, 234, 228, 0.5);
-    --red-dark: #B83030;
-    --primary-100: #F26CF9;
-    --primary-90: #F589FA;
+    --cool-gray-10: #EEEFFF;
+    --cool-gray-20: #E4E5F5;
+    --cool-gray-30: #DDDEED;
+    --cool-gray-40: #D1D2E0;
+    --cool-gray-50: #B0B1BD;
+    --cool-gray-60: #8F8F99;
+    --cool-gray-70: #72737A;
+    --cool-gray-80: #56565C;
+    --cool-gray-90: #39393D;
+    --cool-gray-100: #131314;
+    --headline-color: var(--secondary-100);
+    --text-color: var(--gray-100);
+    --text-muted-color: var(--gray-60);
+    --background-color: var(--gray-10);
+    --nav-background-color: var(--cool-gray-20);
+    --header-background-color: var( --gray-20);
+    --main-background-color: var( --gray-20);
+    --footer-background-color: var( --gray-20);
+    --section-background-color: var(--gray-20);
+    --border-color: var(--gray-40);
+    --separator-border-color: var(--gray-40);
+    --separator-text-color: var(--gray-60);
+    --separator-background-color: var(--gray-10);
     --link-color: var(--primary-100);
     --link-hover-color: var(--primary-90);
-    --card-border-color: var(--gray-20);
-    --text-color: var(--gray-100);
-    --background-color: var(--gray-10);
-    --headline-color: var(--secondary-100);
-    --input-text-color: var(--gray-100);
-    --input-border-color: var(--gray-40);
-    --text-muted-color: var(--gray-60);
-    --main-background-color: var( --gray-20);
-    --input-background-color: var(--gray-10);
     --card-background-color: var(--gray-10);
-    --form-error-message-text-color: var(--red-light);
-    --form-error-message-background-color: var(--red-light);
+    --card-border-color: var(--gray-20);
     --button-text-color: var(--gray-90);
     --button-border-color: transparent;
     --button-background-color: transparent;
+    --button-hover-text-color: var(--gray-90);
+    --button-hover-border-color: transparent;
+    --button-hover-background-color: transparent;
+    --button-link-text-color: var(--primary-100);
+    --button-link-border-color: transparent;
+    --button-link-background-color: transparent;
+    --button-link-hover-text-color: var(--primary-100);
+    --button-link-hover-border-color: transparent;
+    --button-link-hover-background-color: transparent;
     --button-primary-text-color: var(--gray-10);
     --button-primary-border-color: var(--primary-100);
     --button-primary-background-color: var(--primary-100);
     --button-primary-hover-text-color: var(--gray-10);
     --button-primary-hover-border-color: var(--primary-90);
     --button-primary-hover-background-color: var(--primary-90);
-}
+    --button-secondary-text-color: var(--secondary-100);
+    --button-secondary-border-color: var(--cool-gray-10);
+    --button-secondary-background-color: var(--cool-gray-10);
+    --button-outline-text-color: var(--gray-90);
+    --button-outline-border-color: var(--gray-30);
+    --button-outline-background-color: transparent;
+    --input-background-color: var(--gray-10);
+    --input-border-color: var(--gray-40);
+    --input-border-focus-color: var(--primary-50);
+    --input-text-color: var(--gray-100);
+    --input-placeholder-color: var(--gray-50);
+    --checkbox-background-color: var(--gray-10);
+    --checkbox-border-color: var(--gray-40);
+    --checkbox-checked-background-color: var(--primary-100);
+    --checkbox-checked-border-color: var(--primary-100);
+    --checkbox-checked-text-color: var(--gray-10);
+
 
 *, *::after.before, *::after {
     box-sizing: border-box;
@@ -78,20 +116,13 @@ html, body {
     gap: 1rem;
 }
 
-.main-layout {
+main {
     display: flex;
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
     grid-area: main;
     overflow: hidden;
-}
-
-.main-authlayout {
-    grid-area: main;
-    background-color: var(--main-background-color);
-    border-radius: 1rem;
-    padding: 1.5rem;
 }
 
 /* SIDEBAR */
@@ -561,11 +592,7 @@ html, body {
     color: var(--gray-100);
 }
 
-
-
-
-
-/*  */
+/*Auth layout*/
 .center-wrapper {
     display: flex;
     justify-content: center;
@@ -573,50 +600,8 @@ html, body {
     height: 100dvh;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 600;
-    color: var(--headline-color);
-    font-family: var(--font);
-    margin: 0;
-    padding: 0;
-}
+/*Generall button design*/
 
-h1 {
-    font-size: 32px;
-}
-
-h2 {
-    font-size: 28px;
-}
-
-h3 {
-    font-size: 26px;
-}
-
-h4 {
-    font-size: 24px;
-}
-
-h5 {
-    font-size: 22px;
-}
-
-h6 {
-    font-size: 20px;
-}
-
-/* Links */
-a {
-    color: var(--link-color);
-    text-decoration: none;
-}
-
-    a:hover {
-        color: var(--link-hover-color);
-        text-decoration: underline;
-    }
-
-/* Buttons */
 .btn {
     color: var(--button-text-color);
     border: 1px solid var(--button-border-color);
@@ -651,20 +636,16 @@ a {
         transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
     }
 
-/* Cards */
+/*Generall card design*/
 .card {
     background-color: var(--card-background-color);
     border-radius: 1rem;
     padding: 1.5rem;
     width: 100%;
-    border: 1px solid var(--gray-30);
 }
 
     .card .card-header {
-        padding: 1rem 2rem 1rem;
-    }
-
-    .card card-title {
+        padding: 1rem 2rem 1.5rem;
     }
 
     .card .card-body {
@@ -675,8 +656,7 @@ a {
         padding: 2rem 2rem 1rem;
     }
 
-
-/* Forms */
+/*Generall form design*/
 .form-group {
     display: grid;
     gap: 0.5rem;
@@ -687,10 +667,109 @@ a {
         font-size: 0.7em;
     }
 
+.form-label {
+    font-size: 1em;
+    margin-left: 1.5rem;
+}
+
+.form-input {
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    outline: none;
+    color: var(--input-text-color);
+    border: 1px solid var(--input-border-color);
+    background-color: var(--input-background-color);
+    font-size: 1em;
+}
+
+    .form-input::placeholder {
+        color: var(--input-placeholder-color);
+        font-size: 0.9em;
+    }
+
+    .form-input:focus {
+        border-color: var(--input-border-focus-color);
+    }
+
 form button[type="submit"] {
     width: 100%;
     margin: 1rem 0;
 }
+
+
+.checkbox {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    margin: 0.5rem 0 0;
+    color: var(--text-muted-color);
+}
+
+    .checkbox .form-label {
+        font-size: 0.8em;
+        text-align: left;
+        margin: 0;
+        padding: 0;
+    }
+
+.form-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    margin: 0;
+}
+
+    .form-checkbox input {
+        opacity: 0;
+        position: absolute;
+        cursor: pointer;
+    }
+
+    .form-checkbox .checkmark {
+        height: 30px;
+        width: 30px;
+        background-color: var(--checkbox-checked-text-color);
+        border-radius: 10px;
+        border: 2px solid var(--checkbox-border-color);
+        display: inline-block;
+        margin-right: 1rem;
+        position: relative;
+        transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .form-checkbox input:checked ~ .checkmark {
+        background-color: var(--checkbox-checked-background-color);
+        border-color: var(--checkbox-checked-border-color);
+    }
+
+    .form-checkbox .checkmark::after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .form-checkbox input:checked ~ .checkmark::after {
+        display: block;
+        left: 9px;
+        top: 4px;
+        width: 8px;
+        height: 16px;
+        border: solid var(--checkbox-checked-text-color);
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+    }
+
+/*Login specifik css*/
+#login {
+    width: 600px;
+    text-align: center;
+}
+
+    #login.card .card-body {
+        padding: 0 3rem;
+    }
 
 .additional-info {
     padding: 0 1rem;
@@ -705,147 +784,3 @@ form button[type="submit"] {
     .additional-info.center {
         justify-content: center;
     }
-
-    .additional-info.right {
-        justify-content: flex-end;
-    }
-
-.verification-code-wrapper {
-    display: grid;
-    margin-top: 0.2rem;
-    grid-template-columns: repeat(6, 1fr);
-}
-
-.verification-code-input {
-    font-size: 1.6em;
-    height: 50px;
-    width: 50px;
-    text-align: center;
-    border-radius: 12px;
-    outline: none;
-    color: var(--input-text-color);
-    border: 1px solid var(--input-border-color);
-    background-color: var(--input-background-color);
-}
-
-.validation-error-message {
-    color: var(--form-error-message-text-color);
-    background-color: var(--form-error-message-background-color);
-    font-size: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 0;
-    padding: 0.6rem;
-    border-radius: 10px;
-}
-
-#signup {
-    width: 600px;
-    text-align: center;
-}
-
-    #signup.card .card-body {
-        padding: 0 3rem;
-    }
-
-    #signup .form-alreadyhaveaccount {
-        font-size: 0.9em;
-        color: var(--text-muted-color);
-    }
-
-#login {
-    width: 600px;
-    text-align: center;
-}
-
-    #login.card .card-body {
-        padding: 0 3rem;
-    }
-
-
-    
-/* FORM INPUT AND VALIDATION */
-
-.form-input {
-    width: 200px;
-    height: 48px;
-    border-radius: 15px;
-    border: 1px solid var(--gray-10);
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.field-validation-error {
-    color: red;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.input-validation-error {
-    border-color: red;
-}
-
-@media (min-width: 768px) {
-    .form-input {
-        width: 300px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .form-input {
-        width: 550px;
-    }
-}
-
-/*CARDS */
-
-.card-signup {
-    background-color: var(--card-background-color);
-    width: 250px;
-    border-radius: 15px;
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-    padding-top: 1rem;
-    padding-bottom: 2rem;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.card-signup-header {
-    text-align: center;
-}
-
-.card-signup-body {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
-
-.card-signup-body label {
-    display: block;
-    text-align: start;
-}
-
-.card-signup-footer {
-    text-align: center;
-}
-
-.margin-button {
-    margin-bottom: 1.5rem;
-}
-
-@media (min-width: 768px) {
-    .card-signup {
-        width: 400px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .card-signup {
-        width: 600px;
-    }
-}
