@@ -78,16 +78,16 @@ html, body {
     gap: 1rem;
 }
 
-/*main {
+.main-layout {
     display: flex;
     flex-direction: column;
     width: 100%;
     flex-grow: 1;
     grid-area: main;
     overflow: hidden;
-}*/
+}
 
-main {
+.main-authlayout {
     grid-area: main;
     background-color: var(--main-background-color);
     border-radius: 1rem;
