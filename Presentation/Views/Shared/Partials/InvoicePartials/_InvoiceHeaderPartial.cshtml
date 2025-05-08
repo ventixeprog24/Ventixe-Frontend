@@ -42,14 +42,16 @@
         </button>
 
         @* USER PROFILE *@
-        <div class="user-profile-wrapper">
-            <div class="profile-pic-wrapper">
-                <img src="" alt="">
+        <a asp-controller="EditUser" asp-action="Index">
+            <div class="user-profile-wrapper">
+                <div class="profile-pic-wrapper">
+                    <img src="" alt="">
+                </div>
+                <div class="user-profile-text-wrapper">
+                    <h4>@currentUser.FullName</h4>
+                </div>
             </div>
-            <div class="user-profile-text-wrapper">
-                <h4>@currentUser.FullName</h4>
-            </div>
-        </div>
+        </a>
     </div>
 </header>
 

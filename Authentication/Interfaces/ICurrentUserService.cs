@@ -4,5 +4,5 @@ namespace Authentication.Interfaces;
 
 public interface ICurrentUserService
 {
-    Task<UserHeaderProfileDto> GetHeaderViewModelAsync();
+    Task<HeaderUserProfileDto> GetHeaderViewModelAsync();
 }
