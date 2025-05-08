@@ -21,15 +21,14 @@ namespace Authentication.Factories
             return appUser;
         }
 
-        public static AppUserProfileDto? ToAppUserProfileDto(UserProfile userProfile, string role)
+        public static AppUserProfileDto? ToAppUserProfileDto(UserProfile userProfile)
         {
-            if (userProfile is null || string.IsNullOrWhiteSpace(role))
+            if (userProfile is null)
                 return null;
 
             AppUserProfileDto appUserProfileDto = new()
             {
                 UserId = userProfile.UserId,
-                Role = role,
                 FirstName = userProfile.FirstName,
                 LastName = userProfile.LastName,
                 Email = userProfile.Email,
@@ -42,12 +41,12 @@ namespace Authentication.Factories
             return appUserProfileDto;
         }
 
-        public static UserHeaderProfileDto? ToHeaderViewModel(UserProfile userProfile)
+        public static HeaderUserProfileDto? ToHeaderUserProfileDto(UserProfile userProfile)
         {
             if (userProfile is null)
                 return null;
 
-            UserHeaderProfileDto headerViewModel = new()
+            HeaderUserProfileDto headerViewModel = new()
             {
                 UserId = userProfile.UserId,
                 FullName = $"{userProfile.FirstName} {userProfile.LastName}"

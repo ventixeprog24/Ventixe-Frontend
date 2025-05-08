@@ -14,12 +14,12 @@ namespace Authentication.Services
         private readonly IHttpContextAccessor _accessor = accessor;
         private readonly UserProfileServiceClient _userProfileService = userProfileService;
 
-        public async Task<UserHeaderProfileDto> GetHeaderViewModelAsync()
+        public async Task<HeaderUserProfileDto> GetHeaderViewModelAsync()
         {
-            UserHeaderProfileDto headerViewModel = new()
+            HeaderUserProfileDto headerViewModel = new()
             {
                 UserId = string.Empty,
-                FullName = string.Empty
+                FullName = "Failed to fetch name"
             };
 
             var httpContext = _accessor.HttpContext;
@@ -32,7 +32,7 @@ namespace Authentication.Services
                 if (userProfilereply.StatusCode != 200) 
                     return headerViewModel;
 
-                headerViewModel = AccountFactory.ToHeaderViewModel(userProfilereply.Profile);
+                headerViewModel = AccountFactory.ToHeaderUserProfileDto(userProfilereply.Profile);
                 if (headerViewModel is not null) 
                     return headerViewModel;
             }
