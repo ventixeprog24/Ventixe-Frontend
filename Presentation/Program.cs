@@ -2,6 +2,7 @@ using Authentication.Handlers;
 using Authentication.Services;
 using Authentication.Contexts;
 using Authentication.Entities;
+using Authentication.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
@@ -11,6 +12,7 @@ using Presentation.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<IdentityUserDbContext>(x =>
     x.UseSqlServer(builder.Configuration.GetConnectionString("VentixeIdentityDb")));
@@ -35,6 +37,7 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
 
 builder.Services.AddScoped<RoleHandler>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 var app = builder.Build();
 

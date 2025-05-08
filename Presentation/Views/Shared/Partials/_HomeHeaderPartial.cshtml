@@ -1,10 +1,14 @@
-﻿<header class="header">
+﻿@{
+    var currentUser = await CurrentUserService.GetHeaderViewModelAsync();
+}
+
+<header class="header">
 
     @* HEADLINE LEFT-SIDE*@
     <div class="headline-wrapper">
         <h4>@ViewData["Title"]</h4>
         @* <h4>Dashboard</h4> *@
-        <p>Hello {user.Name}, welcome back!</p>
+        <p>Hello @currentUser.FullName , welcome back!</p>
     </div>
 
     @* RIGHT-SIDE *@
@@ -36,8 +40,7 @@
                 <img src="" alt="">
             </div>
             <div class="user-profile-text-wrapper">
-                <h4>{user.Name}</h4>
-                <small>{user?.Role}</small>
+                <h4>@currentUser.FullName</h4>
             </div>
         </div>
     </div>
