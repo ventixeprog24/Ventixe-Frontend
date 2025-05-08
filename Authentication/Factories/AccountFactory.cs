@@ -41,5 +41,19 @@ namespace Authentication.Factories
 
             return appUserProfileDto;
         }
+
+        public static UserHeaderProfileDto? ToHeaderViewModel(UserProfile userProfile)
+        {
+            if (userProfile is null)
+                return null;
+
+            UserHeaderProfileDto headerViewModel = new()
+            {
+                UserId = userProfile.UserId,
+                FullName = $"{userProfile.FirstName} {userProfile.LastName}"
+            };
+
+            return headerViewModel;
+        }
     }
 }
