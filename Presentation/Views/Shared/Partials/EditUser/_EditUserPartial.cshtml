@@ -1,0 +1,53 @@
+﻿@model Presentation.Models.EditUser.UpdateProfileInformationViewModel
+
+<div>
+    <h1>Update your Profile information.</h1>
+    <p class="additional-info">When you successfully have updated your profile information you will be redirected to the dashboard.</p>
+</div>
+<div>
+    <form method="post" asp-action="Index" asp-controller="EditUser" novalidate>
+        <label asp-for="FirstName"></label>
+        <div class="form-group">
+            <input asp-for="FirstName" class="form-input" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+        <label asp-for="LastName"></label>
+        <div class="form-group">
+            <input asp-for="LastName" class="form-input" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+        <label asp-for="PhoneNumber"></label>
+        <div class="form-group">
+            <input asp-for="PhoneNumber" class="form-input" />
+            <span asp-validation-for="PhoneNumber"></span>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input asp-for="Email" class="form-input" readonly />
+        </div>
+        <label asp-for="Address"></label>
+        <div class="form-group">
+            <input asp-for="Address" class="form-input" />
+            <span asp-validation-for="Address"></span>
+        </div>
+        <label asp-for="PostalCode"></label>
+        <div class="form-group">
+            <input asp-for="PostalCode" class="form-input" />
+            <span asp-validation-for="PostalCode"></span>
+        </div>
+        <label asp-for="City"></label>
+        <div class="form-group">
+            <input asp-for="City" class="form-input" />
+            <span asp-validation-for="City"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Information</button>
+    </form>
+    @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+    {
+        <div>
+            <p class="field-validation-error">@ViewBag.ErrorMessage</p>
+        </div>
+    }
+</div>
+
+@await Html.PartialAsync("_validationScripts")

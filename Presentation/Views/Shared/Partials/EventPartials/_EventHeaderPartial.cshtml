@@ -1,4 +1,8 @@
-﻿<header class="header">
+﻿@{
+    var currentUser = await CurrentUserService.GetHeaderViewModelAsync();
+}
+
+<header class="header">
     @* HEADLINE LEFT-SIDE*@
     <div class="headline-wrapper">
         <div class="location-path-wrapper">
@@ -38,14 +42,15 @@
         </button>
 
         @* USER PROFILE *@
-        <div class="user-profile-wrapper">
-            <div class="profile-pic-wrapper">
-                <img src="" alt="">
+        <a asp-controller="EditUser" asp-action="Index">
+            <div class="user-profile-wrapper">
+                <div class="profile-pic-wrapper">
+                    <img src="" alt="">
+                </div>
+                <div class="user-profile-text-wrapper">
+                    <h4>@currentUser.FullName</h4>
+                </div>
             </div>
-            <div class="user-profile-text-wrapper">
-                <h4>{user.Name}</h4>
-                <small>{user?.Role}</small>
-            </div>
-        </div>
+        </a>
     </div>
 </header>

@@ -68,7 +68,7 @@ namespace Presentation.Controllers
             if (tokenInQuery)
             {
                 var validateResponse = _verificationService.ValidateVerificationToken(
-                    new ValidateVerificationTokenRequest { Email = email, Token = token });
+                    new ValidateVerificationTokenRequest { Token = token });
                 if (!validateResponse.Succeeded)
                 {
                     ViewBag.ErrorMessage = "Invalid or expired verification link";

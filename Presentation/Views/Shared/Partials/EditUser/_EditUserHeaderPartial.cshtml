@@ -6,9 +6,16 @@
 
     @* HEADLINE LEFT-SIDE*@
     <div class="headline-wrapper">
+        <div class="location-path-wrapper">
+            <a class="nav-link location-first @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
+                <span>Dashboard</span>
+            </a>
+            <span class="separator">/</span>
+            <a class="nav-link location-second @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="EditUser" asp-actions="Index">
+                <span>Edit User</span>
+            </a>
+        </div>
         <h4>@ViewData["Title"]</h4>
-        @* <h4>Dashboard</h4> *@
-        <p>Hello @currentUser.FullName , welcome back!</p>
     </div>
 
     @* RIGHT-SIDE *@

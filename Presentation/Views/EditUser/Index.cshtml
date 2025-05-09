@@ -1,0 +1,23 @@
+﻿@model Presentation.Models.EditUser.UpdateProfileInformationViewModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "_Layout";
+}
+
+@* HEADER BOOKINGS *@
+<partial name="./Partials/EditUser/_EditUserHeaderPartial" />
+
+
+@* UPDATE PROFILE INFORMATION *@
+<section class="profile-container">
+    <div class="profile-overview">
+        <partial name="./Partials/EditUser/_EditUserPartial" model="Model"/>
+    </div>
+</section>
+
+@* DELETE ACCOUNT *@
+<section class="profile-container">
+    <div class="profile-overview profile-container-delete">
+        <partial name="./Partials/EditUser/_DeleteAccountPartial" model="Model"/>
+    </div>
+</section>
