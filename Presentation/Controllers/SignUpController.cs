@@ -35,7 +35,7 @@ namespace Presentation.Controllers
             {
                 ViewBag.ErrorMessage = "User already exists";
                 return View(model);
-            }
+            } 
 
             //This will send the verification code
             var verificationResponse =await _verificationService.SendVerificationCodeAsync(

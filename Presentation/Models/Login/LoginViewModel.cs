@@ -12,5 +12,5 @@ public class LoginViewModel
     [DataType(DataType.Password)]
     [Required(ErrorMessage = "Password must be provided")]
     public string Password { get; set; } = null!;
-    public bool RememberMe { get; set; }
+    public bool IsPersistent { get; set; }
 }
