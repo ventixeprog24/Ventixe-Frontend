@@ -1,0 +1,56 @@
+﻿@{
+    var currentUser = await CurrentUserService.GetHeaderViewModelAsync();
+}
+
+<header class="header">
+
+    @* HEADLINE LEFT-SIDE*@
+    <div class="headline-wrapper">
+        <div class="location-path-wrapper">
+            <a class="nav-link location-first @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
+                <span>Dashboard</span>
+            </a>
+            <span class="separator">/</span>
+            <a class="nav-link location-second @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="EditUser" asp-actions="Index">
+                <span>Edit User</span>
+            </a>
+        </div>
+        <h4>@ViewData["Title"]</h4>
+    </div>
+
+    @* RIGHT-SIDE *@
+    <div class="right-section">
+
+        @* SEARCH-INPUT *@
+        <div class="search-wrapper">
+            <input class="search-input" type="text" placeholder="Search anything">
+            <img class="search-icon" src="~/images/search-icon.svg" alt="search-icon">
+        </div>
+
+        @* NOTIFICATION BUTTON *@
+        <button class="header-btn">
+            <div class="btn-icon-wrapper">
+                <img src="~/images/notification-bell-icon.svg" alt="notification-icon">
+            </div>
+        </button>
+
+        @* SETTINGS BUTTON *@
+        <button class="header-btn">
+            <div class="btn-icon-wrapper">
+                <img src="~/images/settings-gear-icon.svg" alt="settings-gear-icon">
+            </div>
+        </button>
+
+        @* USER PROFILE *@
+        <a asp-controller="EditUser" asp-action="Index">
+            <div class="user-profile-wrapper">
+                <div class="profile-pic-wrapper">
+                    <img src="" alt="">
+                </div>
+                <div class="user-profile-text-wrapper">
+                    <h4>@currentUser.FullName</h4>
+                </div>
+            </div>
+        </a>
+    </div>
+</header>
