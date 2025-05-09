@@ -38,5 +38,26 @@ namespace Authentication.Services
                 ? new AuthServiceResult { Succeeded = false, Message = "Could not add user to role" } 
                 : new AuthServiceResult { Succeeded = true, UserId = appUser.Id };
         }
+
+        public async Task<AuthServiceResult> DeleteAccountAsync(string userId)
+        {
+            var userToDelete = await _userManager.FindByIdAsync(userId);
+            if (userToDelete is null)
+                return new AuthServiceResult { Succeeded = false, Message = "Could not find user to delete"};
+
+            var roles = await _userManager.GetRolesAsync(userToDelete);
+            if (!roles.Any())
+                return new AuthServiceResult { Succeeded = false, Message = "User isn't assigned to any roles" };
+
+            var removeFromRolesResult = await _userManager.RemoveFromRolesAsync(userToDelete, roles);
+            if (!removeFromRolesResult.Succeeded)
+                return new AuthServiceResult { Succeeded = false, Message = "Couldn't remove user from roles" };
+
+            var deleteUserResult = await _userManager.DeleteAsync(userToDelete);
+            if (!deleteUserResult.Succeeded)
+                return new AuthServiceResult { Succeeded = false, Message = "Couldn't remove user" };
+
+            return new AuthServiceResult { Succeeded = true, Message = "Successfully deleted user credentials" };
+        }
     }
 }
