@@ -19,11 +19,13 @@
         <form method="post" asp-action="Index" asp-controller="Login" novalidate>
             <input type="hidden" name="returnUrl" value="@ViewBag?.ReturnUrl" />
             <div class="form-group">
-                <input asp-for="Email" class="form-input" />
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-input" autocomplete="email"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input asp-for="Password" class="form-input" />
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-input" autocomplete="current-password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -32,7 +34,7 @@
                         <input asp-for="IsPersistent" type="checkbox" />
                         <span class="checkmark"></span>
                     </label>
-                    <label class="form-label">Stay signed in</label>
+                    <label class="form-label">Remember me</label>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Log in</button>
@@ -41,9 +43,10 @@
         <div />
         <div class="card-footer">
             <div class="additional-info center">
-                Don't have an account? <a href="/signup">Sign Up</a>
+                Don't have an account? <a asp-action="Index" asp-controller="SignUp">Sign Up</a>
             </div>
 
         </div>
 
     </div>
+</div>

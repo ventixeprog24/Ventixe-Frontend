@@ -35,6 +35,7 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
     o.Address = new Uri(builder.Configuration["Grpc:VerificationServiceProvider"]!);
 });
 
+
 builder.Services.AddScoped<RoleHandler>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
@@ -58,5 +59,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
+await TestUserSeeder.SeedTestUserAsync(app.Services);
 
 app.Run();

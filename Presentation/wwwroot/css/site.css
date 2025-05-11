@@ -244,6 +244,7 @@ html, body {
 .nav-icon {
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
 .signout-btn {
@@ -260,6 +261,7 @@ html, body {
     padding-left: 2rem;
     padding-right: 3.3rem;
     margin-top: auto;
+    cursor: pointer;
 }
 
     .signout-btn:hover {
@@ -725,7 +727,7 @@ a {
     }
 
     .card .card-footer {
-        padding: 2rem 2rem 1rem;
+        padding: 0;
     }
 
 
@@ -806,12 +808,12 @@ form button[type="submit"] {
     }
 
 #login {
-    width: 600px;
+    width: auto;
     text-align: center;
 }
 
     #login.card .card-body {
-        padding: 0 3rem;
+        padding: 0;
     }
 
 /*Stay signed in button*/
@@ -884,7 +886,7 @@ form button[type="submit"] {
 /* FORM INPUT AND VALIDATION */
 
 .form-input {
-    width: 200px;
+    box-sizing: border-box;
     height: 48px;
     border-radius: 15px;
     border: 1px solid var(--input-border-color);
@@ -892,6 +894,11 @@ form button[type="submit"] {
     margin-bottom: 1rem;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
 }
 
 .field-validation-error {
@@ -908,15 +915,17 @@ form button[type="submit"] {
 }
 
 @media (min-width: 768px) {
-    .form-input {
+/*    .form-input {
         width: 300px;
-    }
+    }*/
 }
 
 @media (min-width: 1024px) {
     .form-input {
-        width: 550px;
+        width: 550px
     }
+
+
 }
 
 /*CARDS */
@@ -960,6 +969,14 @@ form button[type="submit"] {
     .card-signup {
         width: 400px;
     }
+
+    .card .card-footer {
+        padding: 2rem 2rem 1rem;
+    }
+
+    #login.card .card-body {
+        padding: 1rem 2rem;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -967,6 +984,7 @@ form button[type="submit"] {
         width: 600px;
     }
 }
+
 
 /* PROFILE */
 .profile-container {
