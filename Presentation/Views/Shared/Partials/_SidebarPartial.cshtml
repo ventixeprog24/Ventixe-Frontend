@@ -1,4 +1,8 @@
-﻿<div class="sidebar">
+﻿@using Authentication.Entities
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUserEntity> signInManager;
+
+<div class="sidebar">
 
     @* LOGOTYPE *@
     <a class="logotype" href="">
@@ -47,13 +51,30 @@
         </div>
     </nav>
     <footer>
-    @* SIGNOUT BUTTON *@
-    <button class="signout-btn">
-        <div class="btn-icon-wrapper">
-            <img class="nav-icon" src="~/images/signout-icon.svg" alt="signout-icon">
-        </div>
-        <div class="signout-text">Sign Out</div>
-    </button>
+        @* SIGNOUT BUTTON *@
+        @if (signInManager.IsSignedIn(User)){
+            <form asp-controller="Login" asp-action="logout" method="post">
+                <button class="signout-btn">
+                    <div class="btn-icon-wrapper">
+                        <img class="nav-icon" src="~/images/signout-icon.svg" alt="signout-icon">
+                    </div>
+                    <div class="signout-text">Sign Out</div>
+                </button>
+            </form>
+        }
+        else
+        {
+            <form asp-controller="Login" asp-action="index" method="post">
+                <button class="signout-btn">
+                    <div class="btn-icon-wrapper">
+                        <img class="nav-icon" src="~/images/signout-icon.svg" alt="signout-icon">
+                    </div>
+                    <div class="signout-text">Log In</div>
+                </button>
+            </form>
+        }
+
+
 
     </footer>
 </div>

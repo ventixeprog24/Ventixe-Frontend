@@ -33,4 +33,11 @@ public class LoginController(AuthService authService) : Controller
         return View(model);
 
     }
+    //logout action
+    [HttpPost]
+    public async Task<IActionResult> LogOut()
+    {
+        await _authService.LogOutAsync();
+        return RedirectToAction("Index", "Login");
+    }
 }

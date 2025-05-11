@@ -68,11 +68,11 @@ namespace Authentication.Services
                 : new AuthServiceResult { Message = "Invalid email or password." };
         }
 
-        public async Task<AuthServiceResult> LogoutAsync()
+        public async Task<AuthServiceResult> LogOutAsync()
         {
             await _signInManager.SignOutAsync();
             return new AuthServiceResult { Succeeded = true };
         }
 
     }
-}
+} 
