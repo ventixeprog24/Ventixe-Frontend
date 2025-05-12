@@ -45,6 +45,7 @@ var app = builder.Build();
 //Uncomment and start app to create roles in the database. 
 //await SeedData.SetRolesAsync(app);
 
+
 app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
@@ -59,6 +60,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-await TestUserSeeder.SeedTestUserAsync(app.Services);
+//uncomment and start app to create test user in the database.
+//await TestUserSeeder.SeedTestUserAsync(app.Services);
+
 
 app.Run();

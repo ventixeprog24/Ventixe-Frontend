@@ -64,15 +64,13 @@ namespace Authentication.Services
         {
             var result = await _signInManager.PasswordSignInAsync(email, password, isPersistent, false);
             return result.Succeeded
-                ? new AuthServiceResult { Succeeded = true }
-                : new AuthServiceResult { Message = "Invalid email or password." };
+                ? new AuthServiceResult { Succeeded = true, Message = "Succesfully signed in." }
+                : new AuthServiceResult { Succeeded = false, Message = "Invalid email or password." };
         }
 
-        public async Task<AuthServiceResult> LogOutAsync()
+        public async Task LogOutAsync()
         {
             await _signInManager.SignOutAsync();
-            return new AuthServiceResult { Succeeded = true };
         }
-
     }
 } 
