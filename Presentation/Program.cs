@@ -1,8 +1,10 @@
+using System.Net;
 using Authentication.Handlers;
 using Authentication.Services;
 using Authentication.Contexts;
 using Authentication.Entities;
 using Authentication.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
@@ -23,7 +25,22 @@ builder.Services.AddIdentity<AppUserEntity, IdentityRole>(x =>
     x.Password.RequiredLength = 8;
     x.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<IdentityUserDbContext>().AddDefaultTokenProviders();
+
 //Configure application cookie here
+builder.Services.ConfigureApplicationCookie(o =>
+{
+    o.LoginPath = "/auth/login";
+    o.AccessDeniedPath = "/auth/login";
+    o.Cookie.SameSite = SameSiteMode.None;
+    o.ExpireTimeSpan = TimeSpan.FromDays(14);
+    o.SlidingExpiration = true;
+    o.Cookie.IsEssential = true;
+    o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
+builder.Services.AddAuthentication(o => {
+    o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie();
 
 //Configuring the external UserProfileService
 builder.Services.AddGrpcClient<UserProfileServiceClient>(o =>
