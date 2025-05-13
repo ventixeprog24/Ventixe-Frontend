@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
+using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using Presentation.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,11 @@ builder.Services.AddIdentity<AppUserEntity, IdentityRole>(x =>
 builder.Services.AddGrpcClient<UserProfileServiceClient>(o =>
 {
     o.Address = new Uri(builder.Configuration["Grpc:UserProfileService"]!);
+});
+//Configuring the external InvoiceServiceProvider
+builder.Services.AddGrpcClient<InvoiceServiceContractClient>(o =>
+{
+    o.Address = new Uri(builder.Configuration["Grpc:InvoiceServiceProvider"]!);
 });
 
 builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
