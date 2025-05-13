@@ -60,6 +60,7 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
 
 
 builder.Services.AddScoped<RoleHandler>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
