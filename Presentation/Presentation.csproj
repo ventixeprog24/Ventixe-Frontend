@@ -26,6 +26,7 @@
 
 	<ItemGroup>
 		<Protobuf Include="Protos\verification.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\invoices.proto" GrpcServices="Client" />
 	</ItemGroup>
 
 </Project>
