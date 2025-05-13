@@ -2,13 +2,14 @@
 using Authentication.Factories;
 using Authentication.Handlers;
 using Authentication.Entities;
+using Authentication.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Services
 {
     //Gör interface för detta.
-    public class AuthService(UserManager<AppUserEntity> userManager, RoleHandler roleHandler, SignInManager<AppUserEntity> signInManager)
+    public class AuthService(UserManager<AppUserEntity> userManager, RoleHandler roleHandler, SignInManager<AppUserEntity> signInManager) : IAuthService
     {
         private readonly UserManager<AppUserEntity> _userManager = userManager;
         private readonly SignInManager<AppUserEntity> _signInManager = signInManager;

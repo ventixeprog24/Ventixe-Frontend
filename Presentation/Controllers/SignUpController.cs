@@ -1,4 +1,5 @@
-﻿using Authentication.Services;
+﻿using Authentication.Interfaces;
+using Authentication.Services;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Helpers;
 using Presentation.Models.SignUp;
@@ -9,11 +10,11 @@ using VerificationServiceClient = VerificationServiceProvider.VerificationContra
 
 namespace Presentation.Controllers
 {
-    public class SignUpController(UserProfileServiceClient userProfileService, VerificationServiceClient verificationServiceClient, AuthService authService) : Controller
+    public class SignUpController(UserProfileServiceClient userProfileService, VerificationServiceClient verificationServiceClient, IAuthService authService) : Controller
     {
         private readonly UserProfileServiceClient _userProfileService = userProfileService;
         private readonly VerificationServiceClient _verificationService = verificationServiceClient;
-        private readonly AuthService _authService = authService;
+        private readonly IAuthService _authService = authService;
 
         #region Set email
         [HttpGet("auth/signup")]
