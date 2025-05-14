@@ -102,7 +102,7 @@ namespace Presentation.Controllers
             switch (removeProfileResult.StatusCode)
             {
                 case 200:
-                    //SignOut function???
+                    await _authService.LogOutAsync();
                     return RedirectToAction("Index", "Login");
                 case 404:
                     ViewBag.DeleteMessage = "Could not find profile to remove";

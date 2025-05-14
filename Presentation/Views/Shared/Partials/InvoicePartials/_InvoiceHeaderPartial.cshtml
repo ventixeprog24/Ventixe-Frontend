@@ -1,4 +1,5 @@
 ﻿@{
+    ViewData["Title"] = "Invoices";
     var currentUser = await CurrentUserService.GetHeaderViewModelAsync();
 }
 
@@ -8,9 +9,9 @@
         <div class="location-path-wrapper">
             <a class="nav-link location-first @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
                 <span>Dashboard</span>
-            </a>
+            </a>       
             <span class="separator">/</span>
-            <a class="nav-link location-second @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="Invoice" asp-actions="Index">
+            <a class="nav-link location-second @(ViewContext.RouteData.Values["controller"]?.ToString() == "Booking" ? "active" : "")" asp-controller="Invoice" asp-actions="Index">
                 <span>Invoices</span>
             </a>
 
@@ -54,4 +55,3 @@
         </a>
     </div>
 </header>
-

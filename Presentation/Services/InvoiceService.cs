@@ -7,15 +7,15 @@ using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContra
 
 namespace Presentation.Services;
 
-public class InvoiceService(InvoiceServiceContractClient invoiceServiceContractClient)
+public class InvoiceService(InvoiceServiceContractClient invoiceService)
 {
-    private readonly InvoiceServiceContractClient _invoiceServiceContractClient =  invoiceServiceContractClient;
+    private readonly InvoiceServiceContractClient _invoiceService =  invoiceService;
 
     public async Task<InvoiceServiceResult> GetAllInvoices()
     {
         try
         { 
-            var serviceResult = await _invoiceServiceContractClient.GetAllInvoicesAsync(new Empty());
+            var serviceResult = await _invoiceService.GetAllInvoicesAsync(new Empty());
             if (serviceResult is null || !serviceResult.Succeeded)
                 return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
             
@@ -34,7 +34,7 @@ public class InvoiceService(InvoiceServiceContractClient invoiceServiceContractC
     {
         try
         {
-            var serviceResult = await _invoiceServiceContractClient.GetInvoiceByInvoiceIdAsync(
+            var serviceResult = await _invoiceService.GetInvoiceByInvoiceIdAsync(
                 new RequestInvoiceById { Id = invoiceId });
             if  (serviceResult is null || !serviceResult.Succeeded)
                 return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
@@ -54,7 +54,7 @@ public class InvoiceService(InvoiceServiceContractClient invoiceServiceContractC
     {
         try
         {
-            var serviceResult = await _invoiceServiceContractClient.GetInvoiceByBookingIdAsync(
+            var serviceResult = await _invoiceService.GetInvoiceByBookingIdAsync(
                 new RequestInvoiceById { Id = invoiceId });
             if  (serviceResult is null || !serviceResult.Succeeded)
                 return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
@@ -74,7 +74,7 @@ public class InvoiceService(InvoiceServiceContractClient invoiceServiceContractC
     {
         try
         {
-            var serviceResult = await _invoiceServiceContractClient.UpdateInvoiceAsync(
+            var serviceResult = await _invoiceService.UpdateInvoiceAsync(
                 new UpdatePaymentStatusRequest {InvoiceId = invoiceId, NewPaymentStatus = paymentStatus});
             if (serviceResult is null || !serviceResult.Succeeded)
                 return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
@@ -92,7 +92,7 @@ public class InvoiceService(InvoiceServiceContractClient invoiceServiceContractC
         try
         {
             var serviceResult =
-                await _invoiceServiceContractClient.DeleteInvoiceAsync(new DeleteInvoiceByIdRequest
+                await _invoiceService.DeleteInvoiceAsync(new DeleteInvoiceByIdRequest
                     { InvoiceId = invoiceId });
             if  (serviceResult is null || !serviceResult.Succeeded)
                 return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };

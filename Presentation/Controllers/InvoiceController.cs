@@ -1,14 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Presentation.Services;
 
 namespace Presentation.Controllers
 {
-    public class InvoiceController : Controller
+    public class InvoiceController(InvoiceService invoiceService) : Controller
     {
-        [Route("Home/invoices")]
-        public IActionResult Index()
+        private readonly InvoiceService _invoiceService = invoiceService;
+        
+        [Route("home/invoices")]
+        public async Task<IActionResult> Index()
         {
-            ViewData["Title"] = "Invoices";
-            return View();
+            var getInvoicesReply = await _invoiceService.GetAllInvoices();
+            if (!getInvoicesReply.Succeeded)
+                return RedirectToAction("Index",  "Home");
+            
+            return View(getInvoicesReply.AllInvoices);
         }
     }
 }

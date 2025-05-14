@@ -1,16 +1,14 @@
-using System.Net;
-using Authentication.Handlers;
-using Authentication.Services;
 using Authentication.Contexts;
 using Authentication.Entities;
+using Authentication.Handlers;
 using Authentication.Interfaces;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Authentication.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Services;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
 using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
-using Presentation.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,21 +24,15 @@ builder.Services.AddIdentity<AppUserEntity, IdentityRole>(x =>
     x.User.RequireUniqueEmail = true;
 }).AddEntityFrameworkStores<IdentityUserDbContext>().AddDefaultTokenProviders();
 
-//Configure application cookie here
+//Configure Identity Cookie
 builder.Services.ConfigureApplicationCookie(o =>
 {
-    o.LoginPath = "/auth/login";
-    o.AccessDeniedPath = "/auth/login";
-    o.Cookie.SameSite = SameSiteMode.None;
-    o.ExpireTimeSpan = TimeSpan.FromDays(14);
+    o.LoginPath = new PathString("/auth/Login");
+    o.ExpireTimeSpan = TimeSpan.FromDays(30);
     o.SlidingExpiration = true;
+    o.Cookie.SameSite = SameSiteMode.None;
     o.Cookie.IsEssential = true;
-    o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
-
-builder.Services.AddAuthentication(o => {
-    o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-}).AddCookie();
 
 //Configuring the external UserProfileService
 builder.Services.AddGrpcClient<UserProfileServiceClient>(o =>
@@ -61,6 +53,7 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
 
 builder.Services.AddScoped<RoleHandler>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<InvoiceService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
