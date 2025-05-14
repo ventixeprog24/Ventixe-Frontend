@@ -8,8 +8,11 @@
 <div id="signup" class="card">
 	<div class="card-header">
 		<h2 class="card-title">Verify Your Email Address</h2>
-		<p class="additional-info">An email with a verification code was sent to @ViewBag.MaskedEmail. Please enter the code below to verify your email address.</p>
-		<p class="validation-error-message">@ViewBag?.ErrorMessage</p>
+		<p class="additional-info">An email with a verification code was sent to @ViewBag.Email. Please enter the code below to verify your email address.</p>
+		@if (!string.IsNullOrEmpty(@ViewBag.ErrorMessage))
+		{
+			<p class="validation-error-message">@ViewBag.ErrorMessage</p>
+		}
 	</div>
 	<div class="card-body">
 		<form method="post" asp-action="AccountVerification" asp-controller="SignUp" novalidate>
