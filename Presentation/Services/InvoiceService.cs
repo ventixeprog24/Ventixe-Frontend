@@ -1,4 +1,5 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using InvoiceServiceProvider;
 using Presentation.Dtos;
 using Presentation.Factories;
 using Presentation.Models.Invoices;
@@ -6,15 +7,15 @@ using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContra
 
 namespace Presentation.Services;
 
-public class InvoiceService(InvoiceServiceContractClient invoiceServiceContractClient)
+public class InvoiceService(InvoiceServiceContractClient invoiceService)
 {
-    private readonly InvoiceServiceContractClient _invoiceServiceContractClient =  invoiceServiceContractClient;
+    private readonly InvoiceServiceContractClient _invoiceService =  invoiceService;
 
     public async Task<InvoiceServiceResult> GetAllInvoices()
     {
         try
         { 
-            var serviceResult = await _invoiceServiceContractClient.GetAllInvoicesAsync(new Empty());
+            var serviceResult = await _invoiceService.GetAllInvoicesAsync(new Empty());
             if (serviceResult is null || !serviceResult.Succeeded)
                 return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
             
@@ -27,6 +28,80 @@ public class InvoiceService(InvoiceServiceContractClient invoiceServiceContractC
         {
             return new InvoiceServiceResult { Succeeded = false, Message = ex.Message };
         }
-        
+    }
+
+    public async Task<InvoiceServiceResult> GetInvoiceByInvoiceId(string invoiceId)
+    {
+        try
+        {
+            var serviceResult = await _invoiceService.GetInvoiceByInvoiceIdAsync(
+                new RequestInvoiceById { Id = invoiceId });
+            if  (serviceResult is null || !serviceResult.Succeeded)
+                return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
+            
+            var returnInvoice = InvoiceFactory.ToInvoiceViewModel(serviceResult.Invoice);
+            return (returnInvoice is not null)
+                ? new InvoiceServiceResult { Succeeded = true , Invoice = returnInvoice }
+                : new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong when converting to view model" };
+        }
+        catch (Exception ex)
+        {
+            return new InvoiceServiceResult { Succeeded = false, Message = ex.Message };
+        }
+    }
+    
+    public async Task<InvoiceServiceResult> GetInvoiceByBookingId(string invoiceId)
+    {
+        try
+        {
+            var serviceResult = await _invoiceService.GetInvoiceByBookingIdAsync(
+                new RequestInvoiceById { Id = invoiceId });
+            if  (serviceResult is null || !serviceResult.Succeeded)
+                return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
+            
+            var returnInvoice = InvoiceFactory.ToInvoiceViewModel(serviceResult.Invoice);
+            return (returnInvoice is not null)
+                ? new InvoiceServiceResult { Succeeded = true , Invoice = returnInvoice }
+                : new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong when converting to view model" };
+        }
+        catch (Exception ex)
+        {
+            return new InvoiceServiceResult { Succeeded = false, Message = ex.Message };
+        }
+    }
+
+    public async Task<InvoiceServiceResult> UpdatePaymentStatus(string invoiceId, bool paymentStatus)
+    {
+        try
+        {
+            var serviceResult = await _invoiceService.UpdateInvoiceAsync(
+                new UpdatePaymentStatusRequest {InvoiceId = invoiceId, NewPaymentStatus = paymentStatus});
+            if (serviceResult is null || !serviceResult.Succeeded)
+                return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
+            
+            return new InvoiceServiceResult { Succeeded = true };
+        }
+        catch (Exception ex)
+        {
+            return new InvoiceServiceResult { Succeeded = false, Message = ex.Message };
+        }
+    }
+
+    public async Task<InvoiceServiceResult> DeleteInvoiceByInvoiceId(string invoiceId)
+    {
+        try
+        {
+            var serviceResult =
+                await _invoiceService.DeleteInvoiceAsync(new DeleteInvoiceByIdRequest
+                    { InvoiceId = invoiceId });
+            if  (serviceResult is null || !serviceResult.Succeeded)
+                return new InvoiceServiceResult { Succeeded = false, Message = "Something went wrong" };
+            
+            return new InvoiceServiceResult { Succeeded = true };
+        }
+        catch (Exception ex)
+        {
+            return new InvoiceServiceResult { Succeeded = false, Message = ex.Message };
+        }
     }
 }

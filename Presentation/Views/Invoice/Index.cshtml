@@ -1,19 +1,18 @@
-﻿@using Presentation.Controllers
+﻿@model List<InvoiceViewModel>
+
 
 @* HEADER INVOICE *@
 <partial name="./Partials/InvoicePartials/_InvoiceHeaderPartial" />
 
 @* INVOICE OVERVIEW *@
-<div class="booking-container">
+<section class="booking-container">
     <div class="booking-overview">
+        <h1>Invoices</h1>
 
-        @* BOOKINGS OVERVIEW HEADER *@
-        <partial name="" />
+        @* INVOICE TABLE  *@
+        <partial name="Partials/InvoicePartials/_InvoiceTablePartial"/>
 
-        @* BOOKING TABLE  *@
-        <partial name="" />
 
-        
     </div>
-</div>
+</section>
 

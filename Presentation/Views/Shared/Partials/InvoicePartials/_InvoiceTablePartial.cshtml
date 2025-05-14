@@ -1,0 +1,30 @@
+﻿@model List<InvoiceViewModel>
+
+@* INVOICE TABLE *@
+<table class="table-container">
+
+    @* TABLE HEAD *@
+    <thead class="table-head-bookings">
+    <tr>
+        <th>Invoice Id</th>
+        <th>Event</th>
+        <th>Amount</th>
+        <th>Due Date</th>
+        <th>Payment Status</th>
+    </tr>
+    </thead>
+
+    @* TABLE BODY *@
+    <tbody class="table-body-bookings">
+    @foreach (var invoice in Model)
+    {
+        <tr class="invoice-table-row">
+            <td>@invoice.InvoiceId</td>
+            <td>@invoice.EventName</td>
+            <td>@invoice.TotalPrice</td>
+            <td>@invoice.DueDate</td>
+            <td>@invoice.Paid</td>
+        </tr>
+    }
+    </tbody>
+</table>
