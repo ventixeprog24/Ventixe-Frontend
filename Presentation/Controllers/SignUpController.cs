@@ -62,8 +62,7 @@ namespace Presentation.Controllers
 
             if (!emailInQuery && !string.IsNullOrWhiteSpace(tempEmail))
                 email = tempEmail;
-
-            if (!emailInQuery && !tokenInQuery)
+            else if (!emailInQuery && !tokenInQuery)
                 return RedirectToAction(nameof(Index));
 
             if (tokenInQuery)
@@ -88,12 +87,13 @@ namespace Presentation.Controllers
         [HttpPost("auth/account-verification")]
         public IActionResult AccountVerification(AccountVerificationViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(model.VerificationCode))
             {
-                ViewBag.ErrorMessage = "Invalid or expired verification code.";
+                ViewBag.ErrorMessage = "Invalid verification code.";
+                TempData.Keep("Email");
                 return View(model);
             }
-
+                
             var email = TempData["Email"]?.ToString();
             if (string.IsNullOrWhiteSpace(email))
                 return RedirectToAction(nameof(Index));

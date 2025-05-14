@@ -103,7 +103,7 @@
     --checkbox-checked-border-color: var(--primary-100);
     --checkbox-checked-text-color: var(--gray-10);
     /* Form errors */
-    --form-error-message-text-color: var(--red-light);
+    --form-error-message-text-color: var(--red-dark);
     --form-error-message-background-color: var(--red-light);
 }
 
