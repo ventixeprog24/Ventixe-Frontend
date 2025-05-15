@@ -1,5 +1,4 @@
 ﻿using Authentication.Interfaces;
-using Authentication.Services;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Helpers;
 using Presentation.Models.SignUp;
@@ -54,31 +53,12 @@ namespace Presentation.Controllers
 
         #region Account verification
         [HttpGet("auth/account-verification")]
-        public IActionResult AccountVerification(string? email, string? token)
+        public IActionResult AccountVerification()
         {
-            var tempEmail = TempData["Email"]?.ToString();
-            bool emailInQuery = !string.IsNullOrWhiteSpace(email);
-            bool tokenInQuery = !string.IsNullOrWhiteSpace(token);
-
-            if (!emailInQuery && !string.IsNullOrWhiteSpace(tempEmail))
-                email = tempEmail;
-            else if (!emailInQuery && !tokenInQuery)
+            if (TempData["Email"] == null)
                 return RedirectToAction(nameof(Index));
 
-            if (tokenInQuery)
-            {
-                var validateResponse = _verificationService.ValidateVerificationToken(
-                    new ValidateVerificationTokenRequest { Token = token });
-                if (!validateResponse.Succeeded)
-                {
-                    ViewBag.ErrorMessage = "Invalid or expired verification link";
-                    return RedirectToAction(nameof(Index));
-                }
-
-                TempData["Email"] = email;
-            }
-
-            ViewBag.Email = EmailFormatter.MaskEmail(email!);
+            ViewBag.MaskedEmail = EmailFormatter.MaskEmail(TempData["Email"]!.ToString()!);
             TempData.Keep("Email");
 
             return View();
@@ -87,19 +67,36 @@ namespace Presentation.Controllers
         [HttpPost("auth/account-verification")]
         public IActionResult AccountVerification(AccountVerificationViewModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.VerificationCode))
+            if (!ModelState.IsValid)
             {
-                ViewBag.ErrorMessage = "Invalid verification code.";
                 TempData.Keep("Email");
                 return View(model);
             }
-                
-            var email = TempData["Email"]?.ToString();
-            if (string.IsNullOrWhiteSpace(email))
+
+            var tempEmail = TempData["Email"]?.ToString();
+            bool emailQueryInModel = !string.IsNullOrWhiteSpace(model.Email);
+            bool tokenQueryInModel = !string.IsNullOrWhiteSpace(model.VerificationToken);
+
+            if (!emailQueryInModel && !string.IsNullOrWhiteSpace(tempEmail))
+                model.Email = tempEmail;
+            else if (!emailQueryInModel && !tokenQueryInModel)
                 return RedirectToAction(nameof(Index));
 
+            if (tokenQueryInModel)
+            {
+                var response = _verificationService.ValidateVerificationToken(
+                    new ValidateVerificationTokenRequest { Token = model.VerificationToken });
+                if (!response.Succeeded)
+                {
+                    ViewBag.ErrorMessage = response.Error;
+                    return RedirectToAction(nameof(Index));
+                }
+
+                TempData["Email"] = model.Email;
+            }
+
             var validateResponse = _verificationService.ValidateVerificationCode(
-                new ValidateVerificationCodeRequest { Email = email, Code = model.VerificationCode });
+                new ValidateVerificationCodeRequest { Email = model.Email, Code = model.VerificationCode });
             if (!validateResponse.Succeeded)
             {
                 ViewBag.ErrorMessage = validateResponse.Error;
@@ -107,7 +104,7 @@ namespace Presentation.Controllers
                 return View(model);
             }
 
-            TempData["Email"] = email;
+            TempData["Email"] = model.Email;
             return RedirectToAction(nameof(SetPassword));
         }
         #endregion Account verification

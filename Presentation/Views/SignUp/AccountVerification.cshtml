@@ -1,24 +1,36 @@
 ﻿@model AccountVerificationViewModel;
 
 @{
-    ViewData["Title"] = "Verify Your Email Address";
-    Layout = "_AuthLayout";
+	ViewData["Title"] = "Verify Your Email Address";
+	Layout = "_AuthLayout";
+	var email = Context.Request.Query["email"].ToString();
+	var token = Context.Request.Query["token"].ToString();
 }
 
 <div id="signup" class="card">
 	<div class="card-header">
 		<h2 class="card-title">Verify Your Email Address</h2>
-		<p class="additional-info">An email with a verification code was sent to @ViewBag.Email. Please enter the code below to verify your email address.</p>
-		@if (!string.IsNullOrEmpty(@ViewBag.ErrorMessage))
-		{
-			<p class="validation-error-message">@ViewBag.ErrorMessage</p>
-		}
+		<p class="additional-info">An email with a verification code was sent to @ViewBag.MaskedEmail. Please enter the code below to verify your email address.</p>
+		<p class="validation-error-message">@ViewBag.ErrorMessage</p>
 	</div>
 	<div class="card-body">
 		<form method="post" asp-action="AccountVerification" asp-controller="SignUp" novalidate>
+			@if (!string.IsNullOrWhiteSpace(email))
+			{
+				<input type="hidden" name="Email" value="@email" />
+			}
+			@if (!string.IsNullOrWhiteSpace(token))
+			{
+				<input type="hidden" name="VerificationToken" value="@token" />
+			}
 			<input type="hidden" asp-for="VerificationCode" />
+			@* Tagit hjälp av AI för att få ut felmeddelande från modelstate utan att få autmatisk genererad klass och css för felmeddelandet *@
+			@if (ViewData.ModelState.TryGetValue(nameof(Model.VerificationCode), out var state) && state.Errors.Count > 0)
+			{
+				<p class="validation-error-message">@state.Errors[0].ErrorMessage</p>
+			}
 			<div class="form-group">
-				<div class="additional-info right"><a asp-action="Index" asp-controller="SignUp">Go back</a></div> @*Resend verification code?*@
+				<div class="additional-info right"><a asp-action="Index" asp-controller="SignUp">Resend verification code?</a></div>
 
 				<div class="form-group verification-code-wrapper">
 					@for (int i = 0; i < 6; i++)
