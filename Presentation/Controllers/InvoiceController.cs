@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Presentation.Services;
 
 namespace Presentation.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class InvoiceController(InvoiceService invoiceService) : Controller
     {
         private readonly InvoiceService _invoiceService = invoiceService;
