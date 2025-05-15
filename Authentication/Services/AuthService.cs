@@ -17,7 +17,9 @@ namespace Authentication.Services
 
         public async Task<AuthServiceResult> DoesUsernameExistAsync(string email)
         {
-
+            if (string.IsNullOrWhiteSpace(email))
+                return new AuthServiceResult { Succeeded = true, Message = "Bad request. Email is null or whitespace"};
+            
             var doesUsernameExist = await _userManager.Users.AnyAsync(u => u.UserName == email);
             return doesUsernameExist
                 ? new AuthServiceResult { Succeeded = true }
@@ -31,6 +33,9 @@ namespace Authentication.Services
             if (appUser is null)
                 return new AuthServiceResult { Succeeded = false, Message = "Could not convert to AppUserEntity" };
 
+            if (string.IsNullOrWhiteSpace(password))
+                return new AuthServiceResult { Succeeded = false, Message = "Bad request. Password is null or whitespace" };
+            
             var result = await _userManager.CreateAsync(appUser, password);
             if (!result.Succeeded)
                 return new AuthServiceResult { Succeeded = false, Message = "Could not create user" };
