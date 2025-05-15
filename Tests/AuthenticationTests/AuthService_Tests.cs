@@ -33,7 +33,7 @@ public class AuthService_Tests : IDisposable
         _scope = _serviceProvider.CreateScope();
         
         var rm = _scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        string[] roles = { "Admin", "User" };
+        string[] roles = ["Admin", "User"];
         
         foreach (var roleName in roles)
         {
