@@ -783,12 +783,16 @@ form button[type="submit"] {
     background-color: var(--input-background-color);
 }
 
+.validation-error-message:empty {
+    display: none;
+}
+
 .validation-error-message {
     color: var(--form-error-message-text-color);
     background-color: var(--form-error-message-background-color);
     font-size: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 0;
+    margin-top: 0.8rem;
+    margin-bottom: 1rem;
     padding: 0.6rem;
     border-radius: 10px;
 }
