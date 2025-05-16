@@ -1,4 +1,5 @@
 ﻿using Authentication.Entities;
+using Authentication.Factories;
 using Authentication.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,33 +19,32 @@ namespace Presentation.Controllers
         [HttpGet("user/edit")]
         public async Task<IActionResult> Index()
         {
-            //string userId = _userManager.GetUserId(User);
-            //if (string.IsNullOrWhiteSpace(userId))
-            //    return RedirectToAction("Index", "Home");
+            string userId = _userManager.GetUserId(User);
+            if (string.IsNullOrWhiteSpace(userId))
+                return RedirectToAction("Index", "Home");
 
-            //var userProfileReply =
-            //    await _userProfileServiceClient.GetUserProfileByIdAsync(new RequestByUserId { UserId = userId });
-            //if (userProfileReply is null)
-            //    return RedirectToAction("Index", "Home");
+            var userProfileReply =
+                await _userProfileServiceClient.GetUserProfileByIdAsync(new RequestByUserId { UserId = userId });
+            if (userProfileReply is null)
+                return RedirectToAction("Index", "Home");
 
-            //var appUserProfileDto = AccountFactory.ToAppUserProfileDto(userProfileReply.Profile);
-            //if (appUserProfileDto is null)
-            //    return RedirectToAction("Index", "Home");
+            var appUserProfileDto = AccountFactory.ToAppUserProfileDto(userProfileReply.Profile);
+            if (appUserProfileDto is null)
+                return RedirectToAction("Index", "Home");
 
-            //UpdateProfileInformationViewModel model = new()
-            //{
-            //    UserId = userId,
-            //    FirstName = appUserProfileDto.FirstName,
-            //    LastName = appUserProfileDto.LastName,
-            //    Email = appUserProfileDto.Email,
-            //    PhoneNumber = appUserProfileDto.PhoneNumber,
-            //    Address = appUserProfileDto.Address,
-            //    PostalCode = appUserProfileDto.PostalCode,
-            //    City = appUserProfileDto.City
-            //};
+            UpdateProfileInformationViewModel model = new()
+            {
+                UserId = userId,
+                FirstName = appUserProfileDto.FirstName,
+                LastName = appUserProfileDto.LastName,
+                Email = appUserProfileDto.Email,
+                PhoneNumber = appUserProfileDto.PhoneNumber,
+                Address = appUserProfileDto.Address,
+                PostalCode = appUserProfileDto.PostalCode,
+                City = appUserProfileDto.City
+            };
 
-            //return View(model);
-            return View();
+            return View(model);
         }
 
         [HttpPost("user/edit")]

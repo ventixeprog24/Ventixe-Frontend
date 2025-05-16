@@ -2,7 +2,7 @@
 
 <div>
     <p class="additional-info-warning">Deleting the account can not be undone and you will lose all data connected to the account, including all Bookings!</p>
-    <a class="btn btn-primary"  asp-controller="EditUser" asp-action="DeleteUser" @* asp-route-userId="@Model.UserId" *@>Delete Account</a>
+    <a class="btn btn-primary"  asp-controller="EditUser" asp-action="DeleteUser" asp-route-userId="@Model.UserId">Delete Account</a>
     @if (!string.IsNullOrWhiteSpace(ViewBag.DeleteMessage))
     {
         <div>
