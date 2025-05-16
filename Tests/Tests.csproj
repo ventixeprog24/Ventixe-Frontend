@@ -21,6 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Authentication\Authentication.csproj" />
+      <ProjectReference Include="..\Presentation\Presentation.csproj" />
     </ItemGroup>
 
 </Project>
