@@ -17,7 +17,6 @@ public class AuthService_Tests : IDisposable
 
     public AuthService_Tests()
     {
-        //GPT gave a lot of help to make this setup work because I had scoping issues... GPT generated and edited by me.
         var services = new ServiceCollection();
         services.AddDbContext<IdentityUserDbContext>(options =>
             options.UseInMemoryDatabase($"TestDb-{Guid.NewGuid()}"));

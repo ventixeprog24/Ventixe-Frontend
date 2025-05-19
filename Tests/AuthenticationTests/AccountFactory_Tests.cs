@@ -102,5 +102,4 @@ public class AccountFactory_Tests
         // Assert
         Assert.Null(headerDto);
     }
-
 }
