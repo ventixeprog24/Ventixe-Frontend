@@ -19,13 +19,12 @@ public class RoleHandler_Tests
 
     public RoleHandler_Tests()
     {
-        //Used the AuthService setup and edited, also some debugging help from GPT.
         var services = new ServiceCollection();
         services.AddDbContext<IdentityUserDbContext>(opts =>
             opts.UseInMemoryDatabase($"TestDb-{Guid.NewGuid()}")
         );
         services.AddIdentity<AppUserEntity, IdentityRole>(options =>
-            //GPT generated.
+            //GPT generated after debugging help.
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
