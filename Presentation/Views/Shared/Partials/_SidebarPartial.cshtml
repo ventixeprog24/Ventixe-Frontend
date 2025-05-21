@@ -49,6 +49,15 @@
                 <span>Invoices</span>
             </a>
         </div>
+
+        @* LOCATION NAVLINK *@
+        <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Location" ? "active" : "")">
+            <div class="navlink-left-rectangle"></div>
+            <img class="nav-icon" src="~/images/location-icon.svg" alt="location-icon" />
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Location" ? "active" : "")" asp-controller="Location" asp-action="Index">
+                <span>Locations</span>
+            </a>
+        </div>
     </nav>
     <footer>
         @* SIGNOUT BUTTON *@
