@@ -54,7 +54,7 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
 
 builder.Services.AddGrpcClient<BookingServiceClient>(o =>
 {
-    o.Address = new Uri(builder.Configuration["Grpc:BookingSeviceProvider"]!);
+    o.Address = new Uri(builder.Configuration["Grpc:BookingServiceProvider"]!);
 });
 
 builder.Services.AddGrpcClient<LocationServiceContractClient>(o =>
@@ -68,6 +68,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<InvoiceService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+builder.Services.AddScoped<BookingService>();
 
 var app = builder.Build();
 
