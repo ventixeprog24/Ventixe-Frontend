@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Presentation.Models.Bookings;
 using Presentation.Services;
 
 namespace Presentation.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class BookingController(BookingService bookingService) : Controller
     {
         private readonly BookingService _bookingService = bookingService;
@@ -20,6 +22,18 @@ namespace Presentation.Controllers
             //}
             ViewData["Title"] = "Bookings";
             return View(bookings.Bookings);
+        }
+
+        [Route("Home/bookings/bookingdetails")]
+        public async Task<IActionResult> BookingDetails(/*string id*/)
+        {
+            //var booking = await _bookingService.GetBookingAsync(id);
+            //if (!booking.IsSuccess)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+            ViewData["Title"] = "Booking Details";
+            return View(/*booking.Booking*/);
         }
     }
 }
