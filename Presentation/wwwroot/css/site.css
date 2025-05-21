@@ -616,10 +616,15 @@ html, body {
     color: var(--gray-100);
 }
 
-
-
-
-
+/* BOOKING DETAILS */
+.booking-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: var(--gray-10);
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
 /*  */
 .center-wrapper {
     display: flex;

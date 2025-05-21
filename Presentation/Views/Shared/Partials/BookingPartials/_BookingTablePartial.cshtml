@@ -20,7 +20,9 @@
     <tbody class="table-body-bookings">
         @foreach (var booking in Model)
         {
-            <tr>
+            // AI SUGGESTED ONLCICK LINE IN TR TAG. TRIED DIFFERENT VERSIONS WITH ( asp-controller="Home" asp-actions="Index" )
+            // WHICH APPARENTLY DONT WORK ON TABLES OR TR TAGS.
+            <tr onclick="window.location.href='@Url.Action("BookingDetails", "Booking"/*, new { id = booking.Id }*/)'">
                 <td class="table-first-column">
                     <div class="text-date">@booking.EventDate.ToString("yyyy-mm-dd")</div>
                     <div class="text-time">@booking.EventDate.ToString("HH:mm")</div>
@@ -48,6 +50,7 @@
                     <div class="text-amount">@booking.TotalPrice</div>
                 </td>
             </tr>
+
         }
     </tbody>
 </table>
