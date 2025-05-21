@@ -6,11 +6,11 @@ using Authentication.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Presentation.Services;
+using BookingServiceClient = BookingServiceProvider.BookingServiceContract.BookingServiceContractClient;
+using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
-using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
-using BookingServiceClient = BookingServiceProvider.BookingServiceContract.BookingServiceContractClient;
-
+using LocationServiceContractClient = LocationServiceProvider.LocationServiceContract.LocationServiceContractClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +55,11 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
 builder.Services.AddGrpcClient<BookingServiceClient>(o =>
 {
     o.Address = new Uri(builder.Configuration["Grpc:BookingSeviceProvider"]!);
+});
+
+builder.Services.AddGrpcClient<LocationServiceContractClient>(o =>
+{
+    o.Address = new Uri(builder.Configuration["Grpc:LocationServiceProvider"]!);
 });
 
 
