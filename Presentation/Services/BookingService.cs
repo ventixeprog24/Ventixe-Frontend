@@ -35,7 +35,6 @@ namespace Presentation.Services
 
                 //    bookingsResult.Bookings?.Add(bookingViewModel);
                 //}
-                Console.WriteLine($"BookingService: Is bookingsResult null : {bookingsResult.Bookings}");
                 return bookingsResult;
             }
             catch (Exception ex)
@@ -49,11 +48,11 @@ namespace Presentation.Services
         {
             try
             {
-                var booking = await _bookingService.GetBookingAsync(new RequestGetBooking { Id = bookingId });
-                if (booking == null)
-                {
-                    return new BookingServiceResult { IsSuccess = false, Message = "No booking found in database." };
-                }
+                //var booking = await _bookingService.GetBookingAsync(new RequestGetBooking { Id = bookingId });
+                //if (booking == null)
+                //{
+                //    return new BookingServiceResult { IsSuccess = false, Message = "No booking found in database." };
+                //}
 
                 var bookingViewModel = BookingModelFactory.CreateBookingViewModel(/* booking.Booking */);
 
