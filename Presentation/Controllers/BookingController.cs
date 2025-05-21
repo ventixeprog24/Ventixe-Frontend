@@ -15,7 +15,6 @@ namespace Presentation.Controllers
         {
             var bookings = await _bookingService.GetAllBookings();
 
-            Console.WriteLine($"CONTROLLER: Is Bookings null: {bookings.Bookings?.Count}");
             //if (!bookings.IsSuccess)
             //{
             //    return RedirectToAction("Index", "Home");
@@ -24,16 +23,16 @@ namespace Presentation.Controllers
             return View(bookings.Bookings);
         }
 
-        [Route("Home/bookings/bookingdetails")]
-        public async Task<IActionResult> BookingDetails(/*string id*/)
+        [Route("Home/bookingdetails")]
+        public async Task<IActionResult> BookingDetails(string id)
         {
-            //var booking = await _bookingService.GetBookingAsync(id);
-            //if (!booking.IsSuccess)
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            var booking = await _bookingService.GetBookingAsync(id);
+            if (!booking.IsSuccess)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewData["Title"] = "Booking Details";
-            return View(/*booking.Booking*/);
+            return View(booking.Booking);
         }
     }
 }

@@ -1,18 +1,14 @@
 ﻿@using Presentation.Controllers
+@model BookingViewModel
 
 @* HEADER BOOKINGS *@
 <partial name="./Partials/BookingPartials/_BookingHeaderPartial" />
 
 @* BOOKINGS OVERVIEW *@
-<div class="booking-container">
+<div class="booking-details-container">
     <div class="booking-details">
-        <div>BookingDetails</div>
-        <footer class="footer-overview">
 
-            @* OVERVIEW FOOTER - REMOVE MABYE? *@
-            <div>
-                Footer?
-            </div>
-        </footer>
+            @* BOOKING DETAILS *@
+        <partial name="./Partials/BookingPartials/_BookingDetailsPartial" />
     </div>
 </div>

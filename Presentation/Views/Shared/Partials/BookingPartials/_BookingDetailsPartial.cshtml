@@ -1,0 +1,35 @@
+﻿@model BookingViewModel
+
+<h1>Booking information</h1>
+
+<div class="date-time-wrapper">
+    <h5>@Model.EventDate.ToString("yyyy-mm-dd")</h5>
+    <h5>@Model.EventDate.ToString("HH:mm")</h5>
+</div>
+
+<h3>@Model.EventName</h3>
+
+<h6>{booking.EventLocation}</h6>
+
+<h2>Ticket Information</h2>
+
+@* TICKET INFO *@
+<div class="ticket-info-wrapper">
+    <div>
+        <h5>Ticket Price</h5>
+        <h6>@Model.TicketPrice</h6>
+    </div>
+    <div>
+        <h5>Qty</h5>
+        <h6>@Model.TicketAmount</h6>
+    </div>
+    <div>
+        <h5>Total </h5>
+        <h6>@Model.TotalPrice</h6>
+    </div>
+</div>
+
+@* CANCEL BUTTON  *@
+<div class="cancel-btn-wrapper">
+    <button class="cancel-btn"><div>Cancel Booking</div></button>
+</div>
