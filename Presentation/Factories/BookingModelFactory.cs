@@ -43,6 +43,7 @@ namespace Presentation.Factories
                 TicketPrice = 10,
                 TotalPrice = 20,
                 EventDate = DateTime.Now,
+                //EventDate = new DateTime(2000,01,01),
                 Created = DateTime.Now
             };
             return bookingViewModel;

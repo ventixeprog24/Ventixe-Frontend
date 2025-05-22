@@ -67,5 +67,22 @@
 
 @* CANCEL BUTTON  *@
 <div class="cancel-btn-wrapper">
-    <button class="cancel-btn"><div>Cancel Booking</div></button>
+    @if (Model.EventDate > DateTime.UtcNow)
+    {
+        <form asp-controller="Booking" asp-action="DeleteBooking" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="cancel-btn"><div>Cancel Booking</div></button>
+        </form>
+    }
+    else
+    {
+        <button class="cancel-btn-past-date" disabled><div>Event completed, no changes allowed</div></button>
+    }
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="booking-cancel-error">
+        <p class="error-message-delete">@ViewBag.ErrorMessage</p>
+        </div>
+    }
 </div>
