@@ -68,6 +68,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<InvoiceService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<LocationService>();
 
 builder.Services.AddScoped<BookingService>();
 

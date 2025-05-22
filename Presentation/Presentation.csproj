@@ -36,9 +36,4 @@
 		<Protobuf Include="Protos\location.proto" GrpcServices="Client" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Models\Locations\" />
-	  <Folder Include="Views\Shared\Partials\LocationPartials\" />
-	</ItemGroup>
-
 </Project>

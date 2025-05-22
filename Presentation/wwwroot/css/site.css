@@ -46,6 +46,7 @@
     /* Red */
     --red-light: rgba(255, 234, 228, 0.5);
     --red-dark: #B83030;
+    --red-border: #f21805;
     /* Text and backgrounds */
     --text-color: var(--gray-100);
     --text-muted-color: var(--gray-60);
@@ -87,6 +88,9 @@
     --button-secondary-text-color: var(--secondary-100);
     --button-secondary-border-color: var(--cool-gray-10);
     --button-secondary-background-color: var(--cool-gray-10);
+    --button-secondary-hover-text-color: var(--secondary-100);
+    --button-secondary--hover-border-color: var(--cool-gray-20);
+    --button-secondary-hover-background-color: var(--cool-gray-20);
     --button-outline-text-color: var(--gray-90);
     --button-outline-border-color: var(--gray-30);
     --button-outline-background-color: transparent;
@@ -105,6 +109,11 @@
     /* Form errors */
     --form-error-message-text-color: var(--red-dark);
     --form-error-message-background-color: var(--red-light);
+    --form-error-border-color: var(--red-border);
+    /* Modal */
+    --modal-background-color: var(--gray-10);
+    --modal-screen-background-color: var(--secondary-110);
+    --modal-screen-background-color: rgba(26, 25, 38, 0.2);
 }
 
 *, *::after.before, *::after {
@@ -803,12 +812,39 @@ a {
     color: var(--button-primary-text-color);
     border: 1px solid var(--button-primary-border-color);
     background-color: var(--button-primary-background-color);
+    cursor: pointer;
+    border-radius: 25px;
+    padding: 0.9rem 1.5rem;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    margin: 0;
 }
 
     .btn-primary:hover {
         color: var(--button-primary-hover-text-color);
         border: 1px solid var(--button-primary-hover-border-color);
         background-color: var(--button-primary-hover-background-color);
+        transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+        text-decoration: none;
+    }
+
+.btn-secondary {
+    color: var(--button-secondary-text-color);
+    border: 1px solid var(--button-secondary-border-color);
+    background-color: var( --button-secondary-background-color);
+    cursor: pointer;
+    border-radius: 25px;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    margin: 0;
+}
+
+    .btn-secondary:hover {
+        color: var(--button-secondary-hover-text-color);
+        border: 1px solid var(--button-secondary--hover-border-color);
+        background-color: var(--button-secondary-hover-background-color);
         transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
     }
 
@@ -838,6 +874,11 @@ a {
 
 
 /* Forms */
+.form {
+    width: 100%;
+    text-align: left;
+}
+
 .form-group {
     display: grid;
     gap: 0.5rem;
@@ -848,10 +889,20 @@ a {
         font-size: 0.7em;
     }
 
-form button[type="submit"] {
-    width: 100%;
-    margin: 1rem 0;
+.form-buttons {
+    display: flex;
+    gap: 1rem;
 }
+
+.form-horizontal-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+    .form-horizontal-group .form-group {
+        flex: 1 1 250px;
+    }
 
 .additional-info {
     padding: 0 1rem;
@@ -1021,7 +1072,7 @@ form button[type="submit"] {
 }
 
 .input-validation-error {
-    border-color: var(--red-light);
+    border-color: var(--form-error-border-color);
 }
 
 @media (min-width: 768px) {
@@ -1135,4 +1186,155 @@ form button[type="submit"] {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-top: 1px solid var(--input-border-color);
+}
+
+
+/* LOCATION */
+
+.no-hover .table-body-bookings:hover {
+    background-color: transparent;
+    cursor: default;
+    transition: none
+}
+
+.location-form-header {
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+}
+
+.location-form-input {
+    position: relative;
+    width: 100%;
+    min-height: 40px;
+    font-size: 0.9rem;
+    font-weight: 300;
+    padding: 0.5rem 1rem;
+    outline: none;
+}
+
+.location-field-error {
+    margin-top: -0.8rem;
+    margin-bottom: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+a.btn-secondary {
+    display: inline-block;
+    text-align: center;
+}
+
+#locationNameModal {
+    margin-top: 0.8rem;
+    margin-bottom: 2.1rem;
+}
+
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+#buttonDropdown {
+    width: 35px;
+    height: 35px;
+}
+
+.dropdown-body {
+    display: none;
+    position: absolute;
+    background-color: var(--gray-20);
+    min-width: 180px;
+    z-index: 100;
+    padding: 0.7rem;
+    border-radius: 8px;
+    right: 0;
+    top: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-action {
+    transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+    background-color: transparent;
+    border: none;
+    color: var(--cool-gray-80);
+    border-radius: 8px;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+    .dropdown-action.delete {
+        width: 100%;
+    }
+
+    .dropdown-action img {
+        width: 25px;
+        height: 25px;
+        object-fit: contain;
+    }
+
+    .dropdown-action:hover {
+        background-color: var(--primary-30);
+        color: var(--link-hover-color);
+        text-decoration: none;
+    }
+
+/* Modal */
+
+.modal {
+    z-index: 500;
+    background-color: var(--modal-screen-background-color);
+    display: flex;
+    display: none;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal-content {
+    width: 450px;
+    z-index: 500;
+    background-color: var(--modal-background-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.05);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.8rem;
+}
+
+#locationNameModal {
+    font-weight: bold;
+}
+
+
+.modal .close-modal {
+    cursor: pointer;
+    font-size: 1.9rem;
+    background: transparent;
+    border: none;
 }
