@@ -1,6 +1,7 @@
 ﻿using LocationServiceProvider;
 using Presentation.Dtos;
 using Presentation.Factories;
+using Presentation.Helpers;
 using Presentation.Models.Locations;
 using System.Diagnostics;
 using LocationServiceContractClient = LocationServiceProvider.LocationServiceContract.LocationServiceContractClient;
@@ -13,17 +14,12 @@ namespace Presentation.Services
 
         public async Task<LocationServiceResult> CreateLocation(LocationViewModel viewModel)
         {
+            var validSeats = LocationSeatValidator.ValidateSeatsWithRowsAndGates(viewModel);
+            if (validSeats != null)
+                return new LocationServiceResult { Succeeded = false, ErrorMessage = validSeats };
+
             try
             {
-                if (viewModel.SeatCount > 0 && (viewModel.RowCount <= 0 || viewModel.GateCount <= 0))
-                {
-                    return new LocationServiceResult
-                    {
-                        Succeeded = false,
-                        ErrorMessage = "Row and/or gates must be greater than 0 when seats are provided."
-                    };
-                }
-
                 var request = LocationFactory.ToCreateRequest(viewModel);
 
                 var result = await _locationService.CreateLocationAsync(request);
@@ -70,6 +66,9 @@ namespace Presentation.Services
 
         public async Task<LocationServiceResult<LocationViewModel>> GetLocationById(string id)
         {
+            if (id == null)
+                return new LocationServiceResult<LocationViewModel> { Succeeded = false, ErrorMessage = "ID is required." };
+
             try
             {
                 var result = await _locationService.GetLocationByIdAsync(new LocationByIdRequest { Id = id });
@@ -92,6 +91,10 @@ namespace Presentation.Services
 
         public async Task<LocationServiceResult> UpdateLocation(LocationViewModel viewModel)
         {
+            var validSeats = LocationSeatValidator.ValidateSeatsWithRowsAndGates(viewModel);
+            if(validSeats != null)
+                return new LocationServiceResult { Succeeded = false, ErrorMessage = validSeats };
+
             try
             {
                 var request = LocationFactory.ToUpdateRequest(viewModel);
@@ -115,6 +118,9 @@ namespace Presentation.Services
 
         public async Task<LocationServiceResult> DeleteLocation(string id)
         {
+            if (id == null)
+                return new LocationServiceResult { Succeeded = false, ErrorMessage = "ID is required." };
+
             try
             {
                 var result = await _locationService.DeleteLocationAsync(new LocationByIdRequest { Id = id });
