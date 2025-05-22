@@ -9,7 +9,7 @@ namespace Presentation.Controllers
     {
         private readonly LocationService _locationService = locationService;
 
-        [Route("Home/locations")]
+        [Route("home/locations")]
         public async Task<IActionResult> Index()
         {
             var locations = await _locationService.GetAllLocations();
@@ -85,7 +85,7 @@ namespace Presentation.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // --- Kontakta Event för att se att inget finns aktivt på location som ska tas bort ??
+            // --- Kontakta Event för att bekräfta att inget aktivt event finns på location id??
 
             var deleted = await _locationService.DeleteLocation(id);
             if (!deleted.Succeeded)

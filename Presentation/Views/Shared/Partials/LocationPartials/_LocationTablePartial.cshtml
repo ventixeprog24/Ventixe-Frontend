@@ -14,7 +14,6 @@
 }
 
 <table class="table-container no-hover">
-
 	<thead class="table-head-bookings">
 		<tr>
 			<th>Name</th>
@@ -22,9 +21,9 @@
 			<th>Postal Code</th>
 			<th>City</th>
 			<th>Total seats</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
-
 	<tbody class="table-body-bookings">
 		@foreach (var location in Model)
 		{
@@ -56,12 +55,12 @@
 	</tbody>
 </table>
 
-<div id="deleteLocationModal" class="modal">
+<div id="deleteLocationModal" class="modal" role="dialog">
 	<div class="modal-content">
-		<div class="modal-header">
+		<header class="modal-header">
 			<h4>Confirm deletion</h4>
 			<button type="button" class="close-modal" data-close-modal aria-label="Close">&times;</button>
-		</div>
+		</header>
 		<div class="modal-body">
 			<p>Are you sure you want to delete this location?</p>
 			<p id="locationNameModal">Location name: </p>
@@ -114,7 +113,7 @@
 				const locationName = button.getAttribute('data-name');
 
 				locationNameModal.innerText = `Location name: ${locationName}`;
-				locationIdModal.value = locationId
+				locationIdModal.value = locationId;
 
 				modal.style.display = 'flex';
 			});

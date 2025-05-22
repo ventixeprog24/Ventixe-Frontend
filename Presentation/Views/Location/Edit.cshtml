@@ -2,19 +2,18 @@
 
 <partial name="./Partials/LocationPartials/_LocationHeaderPartial" />
 
-<section class="booking-container">
-	<div class="booking-overview">
-		<form asp-action="Edit" asp-controller="Location" class="form" id="location-form" method="post" novalidate>
-			<header class="location-form-header">
-				<h2>Edit Location</h2>
-			</header>
-
-			<div>
-				@if (ViewBag.ErrorMessage != null)
-				{
-					<p class="validation-error-message">@ViewBag.ErrorMessage</p>
-				}
+<section class="location-form-container">
+	<div class="location-form-overview">
+		<header class="location-form-header">
+			<h2>Edit Location</h2>
+		</header>
+		@if (ViewBag.ErrorMessage != null)
+		{
+			<div class="location-form-error">
+				<p class="validation-error-message">@ViewBag.ErrorMessage</p>
 			</div>
+		}
+		<form asp-action="Edit" asp-controller="Location" class="form" id="location-form" method="post" novalidate>
 			<div class="form-group">
 				<label asp-for="Name" class="form-label"></label>
 				<input asp-for="Name" class="form-input location-form-input" />
@@ -37,7 +36,7 @@
 					<span asp-validation-for="City" class="field-validation-error location-field-error"></span>
 				</div>
 			</div>
-			<div class="form-horizontal-group">
+			<div class="form-horizontal-group three-column-group">
 				<div class="form-group">
 					<label asp-for="SeatCount" class="form-label"></label>
 					<input asp-for="SeatCount" class="form-input location-form-input" type="number" />
@@ -61,3 +60,7 @@
 		</form>
 	</div>
 </section>
+
+@section Scripts {
+	<script src="/js/locationValidate.js" asp-append-version="true"></script>
+}
