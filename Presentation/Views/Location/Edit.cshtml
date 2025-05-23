@@ -7,12 +7,12 @@
 		<header class="location-form-header">
 			<h2>Edit Location</h2>
 		</header>
-		@if (ViewBag.ErrorMessage != null)
-		{
-			<div class="location-form-error">
+		<div class="location-form-error">
+			@if (ViewBag.ErrorMessage != null)
+			{
 				<p class="validation-error-message">@ViewBag.ErrorMessage</p>
-			</div>
-		}
+			}
+		</div>
 		<form asp-action="Edit" asp-controller="Location" class="form" id="location-form" method="post" novalidate>
 			<div class="form-group">
 				<label asp-for="Name" class="form-label"></label>

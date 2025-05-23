@@ -1320,7 +1320,7 @@ a {
     background-color: var(--gray-10);
     padding: 1.5rem;
     border-radius: 1rem;
-    max-width: 800px;
+    max-width: 700px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -1349,6 +1349,7 @@ a {
 }
 
 .location-form-error {
+    min-height: 2.8rem;
     margin: 0 0 0.7rem 0;
     text-align: center;
 }
@@ -1360,7 +1361,7 @@ a {
 }
 
 .three-column-group .form-group {
-    flex: 1 1 220px;
+    flex: 1 1 200px;
 }
 
 a.btn-secondary {
@@ -1475,7 +1476,6 @@ a.btn-secondary {
 #locationNameModal {
     font-weight: bold;
 }
-
 
 .modal .close-modal {
     cursor: pointer;
