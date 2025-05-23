@@ -26,7 +26,7 @@ namespace Presentation.Services
                 var bookingsResult = new BookingServiceResult { IsSuccess = true, Bookings = new List<BookingViewModel>() };
 
                 // TESTING WITH DUMMY DATA
-                var bookingViewModel = BookingModelFactory.CreateBookingViewModel();
+                var bookingViewModel = BookingModelFactory.ToBookingViewModel();
                 bookingsResult.Bookings?.Add(bookingViewModel);
 
                 //foreach (var booking in bookingsReply!.Bookings)
@@ -54,7 +54,7 @@ namespace Presentation.Services
                 //    return new BookingServiceResult { IsSuccess = false, Message = "No booking found in database." };
                 //}
 
-                var bookingViewModel = BookingModelFactory.CreateBookingViewModel(/* booking.Booking */);
+                var bookingViewModel = BookingModelFactory.ToBookingViewModel(/* booking.Booking */);
 
                 return new BookingServiceResult { IsSuccess = true, Booking = bookingViewModel };
             }

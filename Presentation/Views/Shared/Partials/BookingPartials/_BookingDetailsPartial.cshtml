@@ -14,6 +14,8 @@
         <h6>{booking.EventLocation}</h6>
 
     </div>
+
+    @* USER INFO *@
     <div class="user-info-container">
         <h3 class="user-h3">User</h3>
         <div class="user-border-bottom"></div>
@@ -86,3 +88,23 @@
         </div>
     }
 </div>
+
+@* MOVE TO EVENT CARD OR WHATEVER LATER *@
+<form asp-controller="Booking" asp-action="BookingForm" method="post">
+    <input type="hidden" asp-for=Id />
+    <input type="hidden" asp-for=UserId />
+    <input type="hidden" asp-for=EventId />
+    <input type="hidden" asp-for=FirstName />
+    <input type="hidden" asp-for=LastName />
+    <input type="hidden" asp-for=Email />
+    <input type="hidden" asp-for=PhoneNumber />
+    <input type="hidden" asp-for=Address />
+    <input type="hidden" asp-for=PostalCode />
+    <input type="hidden" asp-for=City />
+    <input type="hidden" asp-for=EventName />
+    <input type="hidden" asp-for=TicketPrice />
+
+
+
+    <button type="submit" class="book-event-btn">Proceed to booking</button>
+</form>

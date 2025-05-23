@@ -5,7 +5,7 @@ namespace Presentation.Factories
 {
     public class BookingModelFactory
     {
-        public static BookingViewModel CreateBookingViewModel()
+        public static BookingViewModel ToBookingViewModel()
         {
             //return new BookingViewModel
             //{
@@ -33,13 +33,13 @@ namespace Presentation.Factories
                 EventId = "poasjdpo",
                 FirstName = "Skurre",
                 LastName = "Karlsson",
-                Email = "Fiffel@live.com",
+                Email = "Skurban@live.com",
                 PhoneNumber = "0707080900",
                 Address = "Hökarängen",
                 PostalCode = "12345",
                 City = "Stockholm",
                 EventName = "Nhl - San Jose Shark vs LA Kings",
-                TicketAmount = 2,
+                TicketAmount = 0,
                 TicketPrice = 10,
                 TotalPrice = 20,
                 EventDate = DateTime.Now,
