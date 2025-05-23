@@ -845,6 +845,83 @@ html, body {
     color: var(--red-border);
 }
 
+/* BOOKING FORM */
+
+.booking-form-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background-color: var(--gray-20);
+    border-radius: 1rem;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 70%;
+    background-color: var(--gray-10);
+    padding: 2.5rem 6rem;
+    border-radius: 1rem;
+}
+
+.booking-form h6 {
+    color: var(--cool-gray-60);
+    font-weight: 300;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+.booking-form h5 {
+    color: var(--cool-gray-70);
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+}
+
+.create-booking-h1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+.user-h3-create {
+    padding-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+
+.book-event-btn {
+    background-color: var(--pink-100);
+    border-radius: 1rem;
+    height: 3rem;
+    width: 16rem;
+    border: none;
+    cursor: pointer;
+    color: var(--gray-10);
+    font-size: 1.2rem;
+}
+
+.book-event-btn:hover {
+    background-color: var(--pink-90);
+    transition: background-color 0.2s ease;
+}
+
+.booking-ticketamount-input {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border: 2px solid var(--input-border-color);
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.error-message-create{
+    font-size: 0.9rem;
+    color: var(--red-border);
+}
 
 /*  */
 .center-wrapper {

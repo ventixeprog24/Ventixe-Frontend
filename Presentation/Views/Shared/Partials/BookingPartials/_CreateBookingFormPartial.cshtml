@@ -1,0 +1,110 @@
+﻿@model BookingViewModel
+
+@* AI HJÄLP, JAG OCH JAVASCRIPT ÄR INTE VÄNNER *@
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const ticketAmountInput = document.querySelector(".booking-ticketamount-input");
+        const totalPriceDisplay = document.querySelector("#totalPrice span");
+        const totalPriceHidden = document.getElementById("TotalPrice");
+        const ticketPrice = parseFloat(document.getElementById("TicketPrice").value);
+
+        function updateTotalPrice() {
+            const amount = parseInt(ticketAmountInput.value) || 0;
+            const total = ticketPrice * amount;
+            totalPriceDisplay.textContent = total.toFixed(2);
+            totalPriceHidden.value = total;
+        }
+
+        ticketAmountInput.addEventListener("input", updateTotalPrice);
+        updateTotalPrice();
+    })
+</script>
+
+@* BOOKING FORM *@
+<form asp-controller="Booking" asp-action="CreateBooking" method="post">
+    <h1 class="create-booking-h1">Book event details</h1>
+    <div class="event-user-wrapper">
+        <div class="booking-event-info-wrapper">
+            <h3 class="event-h3">Event</h3>
+            <div class="date-time-wrapper">
+                <h5>@Model.EventDate.ToString("yyyy-mm-dd")</h5>
+                <h5>@Model.EventDate.ToString("HH:mm")</h5>
+            </div>
+
+            <h3>@Model.EventName</h3>
+            <h6>{booking.EventLocation}</h6>
+        </div>
+
+        @* USER INFO *@
+        <div class="user-info-container">
+            <h3 class="user-h3-create">User</h3>
+            <div class="user-border-bottom"></div>
+            <div class="user-info-wrapper">
+                <div class="user-info-text-wrapper">
+                    <div class="user-info-boldtext">Fullname: </div>
+                    <div>@Model.FirstName @Model.LastName</div>
+                </div>
+                <div class="user-info-text-wrapper">
+                    <div class="user-info-boldtext">Email: </div>
+                    <div>@Model.Email</div>
+                </div>
+                <div class="user-info-text-wrapper">
+                    <div class="user-info-boldtext">Phone: </div>
+                    <div>@Model.PhoneNumber</div>
+                </div>
+                <div class="user-info-text-wrapper">
+                    <div class="user-info-boldtext">Adress: </div>
+                    <div>@Model.Address</div>
+                </div>
+                <div class="user-info-text-wrapper">
+                    <div class="user-info-boldtext">City: </div>
+                    <div>@Model.City</div>
+                </div>
+                <div class="user-info-text-wrapper">
+                    <div class="user-info-boldtext">Postalcode: </div>
+                    <div>@Model.PostalCode</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* TICKET INFO *@
+    <h2>Ticket</h2>
+    <table class="ticket-table">
+        <thead>
+            <tr class="ticket-table-head">
+                <th>Ticket Price</th>
+                <th>Qty</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="ticket-table-body">
+                <td>@Model.TicketPrice</td>
+                <td>
+                    <input asp-for=TicketAmount class="booking-ticketamount-input" type="number" value="1" />
+                    <span asp-validation-for="TicketAmount" class="error-message-create"></span>
+                </td>
+                <td id="totalPrice"><span>0</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    @* BOOK EVENT BUTTON  *@
+    <div class="cancel-btn-wrapper">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="EventId" />
+        <input type="hidden" asp-for="FirstName" />
+        <input type="hidden" asp-for="LastName" />
+        <input type="hidden" asp-for="Email" />
+        <input type="hidden" asp-for="PhoneNumber" />
+        <input type="hidden" asp-for="Address" />
+        <input type="hidden" asp-for="PostalCode" />
+        <input type="hidden" asp-for="City" />
+        <input type="hidden" asp-for="EventName" />
+        <input type="hidden" asp-for="TicketPrice" />
+        <input type="hidden" asp-for="TotalPrice" />
+        <button type="submit" class="book-event-btn">Book Event</button>
+    </div>
+</form>

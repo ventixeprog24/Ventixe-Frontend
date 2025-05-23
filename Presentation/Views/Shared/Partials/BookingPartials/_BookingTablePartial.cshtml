@@ -28,7 +28,7 @@
                     <div class="text-time">@booking.EventDate.ToString("HH:mm")</div>
                 </td>
                 <td>
-                    <div class="text-name">@booking.FirstName</div>
+                    <div class="text-name">@booking.FirstName @booking.LastName</div>
                 </td>
                 <td>
                     <div class="text-event-name">@booking.EventName</div>
@@ -49,9 +49,11 @@
                 <td class="table-last-column">
                     <div class="text-amount">@booking.TotalPrice</div>
                 </td>
-            </tr>
-
+            </tr>            
         }
     </tbody>
 </table>
+
+
+
 
