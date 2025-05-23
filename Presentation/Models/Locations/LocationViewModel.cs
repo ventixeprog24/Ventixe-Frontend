@@ -12,10 +12,10 @@ namespace Presentation.Models.Locations
         [Display(Name = "Location Name", Prompt = "Enter Location Name")]
         public string Name { get; set; } = null!;
 
-        [Required(ErrorMessage = "Street Name is required")]
+        [Required(ErrorMessage = "Address is required")]
         [DataType(DataType.Text)]
         [MinLength(2, ErrorMessage = "Must be at least 2 characters.")]
-        [Display(Name = "Street Name", Prompt = "Enter Street Name")]
+        [Display(Name = "Address", Prompt = "Enter Address")]
         public string StreetName { get; set; } = null!;
 
         [Required(ErrorMessage = "Postal Code is required")]
