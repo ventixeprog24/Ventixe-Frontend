@@ -18,38 +18,46 @@
 
     @* TABLE BODY *@
     <tbody class="table-body-bookings">
-        @foreach (var booking in Model)
+        @if (Model.Any())
         {
-            // AI SUGGESTED ONLCICK LINE IN TR TAG. TRIED DIFFERENT VERSIONS WITH ( asp-controller="Home" asp-actions="Index" )
-            // WHICH APPARENTLY DONT WORK ON TABLES OR TR TAGS.
-            <tr onclick="window.location.href='@Url.Action("BookingDetails", "Booking"/*, new { id = booking.Id }*/)'">
-                <td class="table-first-column">
-                    <div class="text-date">@booking.EventDate.ToString("yyyy-mm-dd")</div>
-                    <div class="text-time">@booking.EventDate.ToString("HH:mm")</div>
-                </td>
-                <td>
-                    <div class="text-name">@booking.FirstName @booking.LastName</div>
-                </td>
-                <td>
-                    <div class="text-event-name">@booking.EventName</div>
-                    <div class="text-event-type">{event.Type?}</div>
-                </td>
-                <td>
-                    <div class="ticket-category-tag">
-                        <div class="ticket-category-ellipse"></div>
-                        <div class="text-ticket-category">{event?.ticketCategory}</div>
-                    </div>
-                </td>
-                <td>
-                    <div class="text-price">@booking.TicketAmount</div>
-                </td>
-                <td>
-                    <div class="text-qty">@booking.TicketPrice</div>
-                </td>
-                <td class="table-last-column">
-                    <div class="text-amount">@booking.TotalPrice</div>
-                </td>
-            </tr>            
+            @foreach (var booking in Model)
+            {
+                // AI SUGGESTED ONLCICK LINE IN TR TAG. TRIED DIFFERENT VERSIONS WITH ( asp-controller="Home" asp-actions="Index" )
+                // WHICH APPARENTLY DONT WORK ON TABLES OR TR TAGS.
+                <tr onclick="window.location.href='@Url.Action("BookingDetails", "Booking"/*, new { id = booking.Id }*/)'">
+                    <td class="table-first-column">
+                        <div class="text-date">@booking.EventDate.ToString("yyyy-mm-dd")</div>
+                        <div class="text-time">@booking.EventDate.ToString("HH:mm")</div>
+                    </td>
+                    <td>
+                        <div class="text-name">@booking.FirstName @booking.LastName</div>
+                    </td>
+                    <td>
+                        <div class="text-event-name">@booking.EventName</div>
+                    </td>
+                    <td>
+                        <div class="ticket-category-tag">
+                            <div class="ticket-category-ellipse"></div>
+                            <div class="text-ticket-category">{event?.ticketCategory}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-price">@booking.TicketAmount</div>
+                    </td>
+                    <td>
+                        <div class="text-qty">@booking.TicketPrice</div>
+                    </td>
+                    <td class="table-last-column">
+                        <div class="text-amount">@booking.TotalPrice</div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7">No bookings found.</td>
+            </tr>
         }
     </tbody>
 </table>

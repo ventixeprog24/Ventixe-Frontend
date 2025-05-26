@@ -5,8 +5,9 @@ namespace Presentation.Factories
 {
     public class BookingModelFactory
     {
-        public static BookingViewModel ToBookingViewModel()
+        public static BookingViewModel ToBookingViewModel(/* Booking booking */)
         {
+            // UNCOMMENT WHEN REAL DATA IS AVALIABLE
             //return new BookingViewModel
             //{
             //    Id = booking.Bookingid,
@@ -26,26 +27,29 @@ namespace Presentation.Factories
             //    EventDate = booking.Eventdate.ToDateTime(),
             //    Created = booking.Created.ToDateTime()
             //};
+
+            //TESTING WITH DUMMY DATA
             BookingViewModel bookingViewModel = new()
             {
-                Id = "opkok",
-                UserId = "poajsa",
-                EventId = "poasjdpo",
+                Id = "447c4f0c-49fb-4d56-abff-fdf650d7cb5b",
+                UserId = "3bde95d9-5fa1-4cd6-b644-e137848331cb",
+                EventId = "20e6473b-6f7c-4f66-af3e-6d49e05128e9",
                 FirstName = "Skurre",
-                LastName = "Karlsson",
-                Email = "Skurban@live.com",
-                PhoneNumber = "0707080900",
-                Address = "Hökarängen",
+                LastName = "Karlson",
+                Email = "skurban@live.com",
+                PhoneNumber = "0707070707",
+                Address = "Danderyd",
                 PostalCode = "12345",
                 City = "Stockholm",
-                EventName = "Nhl - San Jose Shark vs LA Kings",
+                EventName = "Nhl - San Jose Sharks vs LA Kings",
                 TicketAmount = 0,
                 TicketPrice = 10,
                 TotalPrice = 20,
                 EventDate = DateTime.Now,
                 //EventDate = new DateTime(2000,01,01),
                 Created = DateTime.Now
-            };
+            }
+            ;
             return bookingViewModel;
         }
     }
