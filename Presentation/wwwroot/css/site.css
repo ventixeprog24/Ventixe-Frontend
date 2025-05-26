@@ -1583,3 +1583,13 @@ a.btn-secondary {
     padding: 1.5rem;
     border-radius: 1rem;
 }
+
+.validation-error-center {
+    color: var(--warning);
+    font-size: 0.8rem;
+    border-radius: 10px;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
