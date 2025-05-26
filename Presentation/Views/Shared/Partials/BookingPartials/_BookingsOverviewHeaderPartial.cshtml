@@ -1,9 +1,15 @@
-﻿<header class="header bookings-overview">
+﻿@{
+    var currentUser = await CurrentUserService.GetHeaderViewModelAsync();
+}
+
+<header class="header bookings-overview">
     @* LEFT-SIDE*@
-    <div class="segment-wrapper">
+    @* <div class="segment-wrapper">
         <button class="segment-btn all-btn active">All</button>
         <button class="segment-btn cancelled-btn">Cancelled?</button>
-    </div>
+    </div> *@
+
+    <h2>@currentUser.FullName's Bookings</h2>
 
     @* RIGHT-SIDE *@
     <div class="right-section">
@@ -16,7 +22,7 @@
     </div>
 
     @* ALL & CANCELLED BUTTON ACTIVE SCRIPT *@
-    <script>
+    @* <script>
         const allBtn = document.querySelector('.all-btn');
         const cancelledBtn = document.querySelector('.cancelled-btn');
 
@@ -31,5 +37,5 @@
             cancelledBtn.classList.add('active');
             allBtn.classList.remove('active');
         });
-    </script>
+    </script> *@
 </header>

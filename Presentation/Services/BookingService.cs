@@ -17,11 +17,12 @@ namespace Presentation.Services
         {
             try
             {
-                var bookingsReply = await _bookingService.GetAllBookingsAsync(new Empty());
-                if (bookingsReply == null)
-                {
-                    return new BookingServiceResult { IsSuccess = false, Message = "No bookings found in database." };
-                }
+                // UNCOMMENT WHEN REAL DATA IS AVALIABLE
+                //var bookingsReply = await _bookingService.GetAllBookingsAsync(new Empty());
+                //if (bookingsReply == null)
+                //{
+                //    return new BookingServiceResult { IsSuccess = false, Message = "No bookings found in database." };
+                //}
 
                 var bookingsResult = new BookingServiceResult { IsSuccess = true, Bookings = new List<BookingViewModel>() };
 
@@ -29,12 +30,40 @@ namespace Presentation.Services
                 var bookingViewModel = BookingModelFactory.ToBookingViewModel();
                 bookingsResult.Bookings?.Add(bookingViewModel);
 
+                // UNCOMMENT WHEN REAL DATA WHEN AVAILABLE
                 //foreach (var booking in bookingsReply!.Bookings)
                 //{
-                //    var bookingViewModel = BookingModelFactory.CreateBookingViewModel(booking);
+                //    var bookingViewModel = BookingModelFactory.ToBookingViewModel(booking);
 
                 //    bookingsResult.Bookings?.Add(bookingViewModel);
                 //}
+                return bookingsResult;
+            }
+            catch (Exception ex)
+            {
+                return new BookingServiceResult { IsSuccess = false, Message = ex.Message };
+            }
+        }
+
+        // GET ALL BOOKINGS FOR USER
+        public async Task<BookingServiceResult> GetAllBookingsByUserId(string userId)
+        {
+            try
+            {
+                var bookingsReply = await _bookingService.GetAllBookingsByUserIdAsync(new RequestGetAllBookingsByUserId { Userid = userId });
+                if (bookingsReply == null)
+                {
+                    return new BookingServiceResult { IsSuccess = false, Message = "No user bookings found in database." };
+                }
+
+                var bookingsResult = new BookingServiceResult { IsSuccess = true, Bookings = new List<BookingViewModel>() };
+
+                foreach (var booking in bookingsReply!.Bookings)
+                {
+                        var bookingViewModel = BookingModelFactory.ToBookingViewModel(/*booking*/);
+                        bookingsResult.Bookings?.Add(bookingViewModel);                    
+                }
+
                 return bookingsResult;
             }
             catch (Exception ex)
@@ -48,11 +77,12 @@ namespace Presentation.Services
         {
             try
             {
-                //var booking = await _bookingService.GetBookingAsync(new RequestGetBooking { Id = bookingId });
-                //if (booking == null)
-                //{
-                //    return new BookingServiceResult { IsSuccess = false, Message = "No booking found in database." };
-                //}
+                //UNCOMMENT TO USE REAL DATA WHEN AVAILABLE
+               //var booking = await _bookingService.GetBookingAsync(new RequestGetBooking { Id = bookingId });
+               // if (booking == null)
+               // {
+               //     return new BookingServiceResult { IsSuccess = false, Message = "No booking found in database." };
+               // }
 
                 var bookingViewModel = BookingModelFactory.ToBookingViewModel(/* booking.Booking */);
 
