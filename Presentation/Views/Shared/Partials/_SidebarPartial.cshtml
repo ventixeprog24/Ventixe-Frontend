@@ -18,7 +18,7 @@
         <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
             <div class="navlink-left-rectangle"></div>
             <img class="nav-icon" src="~/images/dashboard-icon.svg" alt="dashboard-icon" />
-            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">
                 <span>Dashboard</span>
             </a>
         </div>
