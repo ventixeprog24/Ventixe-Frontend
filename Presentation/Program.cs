@@ -9,6 +9,7 @@ using Presentation.Services;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
 using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
+using EventServiceContractClient = EventServiceProvider.EventContract.EventContractClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +50,9 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
 {
     o.Address = new Uri(builder.Configuration["Grpc:VerificationServiceProvider"]!);
 });
+builder.Services.AddGrpcClient<EventServiceContractClient>(o =>
+    o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!)
+);
 
 
 builder.Services.AddScoped<RoleHandler>();
@@ -56,6 +60,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<InvoiceService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<IEventService, EventService>();
 
 var app = builder.Build();
 
