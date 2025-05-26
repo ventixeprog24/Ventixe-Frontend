@@ -1373,7 +1373,6 @@ a {
 .invoice-table-row {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    border-top: 1px solid var(--input-border-color);
 }
 
 
@@ -1559,4 +1558,28 @@ a.btn-secondary {
     font-size: 1.9rem;
     background: transparent;
     border: none;
+}
+
+/* ERROR VIEWS */
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 1.5rem;
+    background-color: var(--gray-20);
+    border-radius: 1rem;
+}
+
+.error-overview {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: var(--gray-10);
+    padding: 1.5rem;
+    border-radius: 1rem;
 }
