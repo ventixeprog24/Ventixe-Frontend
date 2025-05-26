@@ -40,15 +40,18 @@
                 <span>Events</span>
             </a>
         </div>   
-
-        @* INVOICE NAVLINK *@
-        <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")">
-            <div class="navlink-left-rectangle"></div>
-            <img class="nav-icon" src="~/images/invoice-icon.svg" alt="event-ticket-icon" />
-            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="Invoice" asp-action="Index">
-                <span>Invoices</span>
-            </a>
-        </div>
+        
+        @if (User.IsInRole("Admin"))
+        {
+            @* INVOICE NAVLINK *@
+            <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")">
+                <div class="navlink-left-rectangle"></div>
+                <img class="nav-icon" src="~/images/invoice-icon.svg" alt="event-ticket-icon" />
+                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="Invoice" asp-action="Index">
+                    <span>Invoices</span>
+                </a>
+            </div>
+        }
 
         @* LOCATION NAVLINK *@
         <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Location" ? "active" : "")">
