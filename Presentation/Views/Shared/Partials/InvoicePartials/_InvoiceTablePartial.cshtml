@@ -23,7 +23,7 @@
             <td>@invoice.EventName</td>
             <td>@invoice.TotalPrice</td>
             <td>@invoice.DueDate</td>
-            <td>@invoice.Paid</td>
+            <td>@(invoice.Paid ? "Paid" : "Unpaid")</td>
         </tr>
     }
     </tbody>
