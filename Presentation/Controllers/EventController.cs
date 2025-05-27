@@ -28,6 +28,7 @@ namespace Presentation.Controllers
                 BookingStatus = e.Status?.StatusName,
                 Category = e.Category?.CategoryName,
                 Location = e.Location?.Name,
+                SeatCount = e.Location?.Seats?.Count ?? 0,
                 TotalTickets = e.TotalTickets,
                 TicketsSold = e.TicketsSold,
             }).ToList() ?? new List<EventViewModel>();
@@ -93,7 +94,7 @@ namespace Presentation.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(CreateEventViewModel model)
         {
             if (!ModelState.IsValid) 

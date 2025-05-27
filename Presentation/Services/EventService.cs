@@ -26,39 +26,39 @@ public class EventService(EventServiceContractClient eventService, CategoryServi
     private readonly LocationServiceContractClient _locationService = locationService;
     private readonly StatusServiceContractClient _statusService = statusService;
 
-    public Task<GetAllEventsReply> GetAllEventsAsync()
+    public async Task<GetAllEventsReply> GetAllEventsAsync()
     {
-        var reply = _eventService.GetEvents(new Google.Protobuf.WellKnownTypes.Empty());
+        var reply = await _eventService.GetEventsAsync(new Google.Protobuf.WellKnownTypes.Empty());
         return reply.Events.Count > 0
-            ? Task.FromResult(reply)
-            : Task.FromResult(new GetAllEventsReply
+            ? reply
+            : new GetAllEventsReply
             {
                 Exception = reply.Exception
-            });
+            };
     }
-    public Task<GetEventReply> GetEventByIdAsync(string eventId)
+    public async Task<GetEventReply> GetEventByIdAsync(string eventId)
     {
-        var reply = _eventService.GetEventById(new GetEventByIdRequest
+        var reply = await _eventService.GetEventByIdAsync(new GetEventByIdRequest
         {
             EventId = eventId
         });
         return reply.Event is not null
-            ? Task.FromResult(reply)
-            : Task.FromResult(new GetEventReply
+            ? reply
+            : new GetEventReply
             {
                 StatusCode = reply.StatusCode
-            });
+            };
     }
-    public Task<EventReply> CreateEventAsync(Event eventToAdd)
+    public async Task<EventReply> CreateEventAsync(Event eventToAdd)
     {
-        var reply = _eventService.AddEvent(eventToAdd);
+        var reply = await _eventService.AddEventAsync(eventToAdd);
         return reply.StatusCode == 200
-            ? Task.FromResult(reply)
-            : Task.FromResult(new EventReply
+            ? reply
+            : new EventReply
             {
                 StatusCode = reply.StatusCode,
                 Message = reply.Message
-            });
+            };
     }
 
     public Task<EventReply> DeleteEventAsync(string eventId)
@@ -72,20 +72,20 @@ public class EventService(EventServiceContractClient eventService, CategoryServi
         throw new NotImplementedException();
     }
 
-    public Task<GetAllCategoriesReply> GetAllCategoriesAsync()
+    public async Task<GetAllCategoriesReply> GetAllCategoriesAsync()
     {
-        var reply = _categoryService.GetCategories(new Google.Protobuf.WellKnownTypes.Empty());
-        return  Task.FromResult(reply);
+        var reply = await _categoryService.GetCategoriesAsync(new Google.Protobuf.WellKnownTypes.Empty());
+        return reply;
   
     }
-    public Task<LocationListReply> GetAllLocationsAsync()
+    public async Task<LocationListReply> GetAllLocationsAsync()
     {
-        var reply = _locationService.GetAllLocations(new LocationServiceProvider.Empty());
-        return Task.FromResult(reply);
+        var reply = await _locationService.GetAllLocationsAsync(new LocationServiceProvider.Empty());
+        return reply;
     }
-    public Task<GetAllStatusesReply> GetAllStatusesAsync()
+    public async Task<GetAllStatusesReply> GetAllStatusesAsync()
     {
-        var reply = _statusService.GetStatuses(new Google.Protobuf.WellKnownTypes.Empty());
-        return Task.FromResult(reply);
+        var reply = await _statusService.GetStatusesAsync(new Google.Protobuf.WellKnownTypes.Empty());
+        return reply;
     }
 }
