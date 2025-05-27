@@ -1,7 +1,7 @@
 ﻿@model List<InvoiceViewModel>
 
 @* INVOICE TABLE *@
-<table class="table-container">
+<table class="table-container no-hover">
 
     @* TABLE HEAD *@
     <thead class="table-head-bookings">
@@ -23,7 +23,7 @@
             <td>@invoice.EventName</td>
             <td>@invoice.TotalPrice</td>
             <td>@invoice.DueDate</td>
-            <td>@invoice.Paid</td>
+            <td>@(invoice.Paid ? "Paid" : "Unpaid")</td>
         </tr>
     }
     </tbody>

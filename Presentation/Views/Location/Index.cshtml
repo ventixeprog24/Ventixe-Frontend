@@ -1,0 +1,16 @@
+﻿@model List<LocationViewModel>
+
+<partial name="./Partials/LocationPartials/_LocationHeaderPartial" />
+
+<section class="booking-container">
+    <div class="booking-overview">
+        <header class="header bookings-overview">
+            <h2>Location List</h2>
+            <nav class="right-section">
+                <a asp-controller="Location" asp-action="Create" class="btn-primary">+ Add Location</a>
+            </nav>
+        </header>
+
+        <partial name="./Partials/LocationPartials/_LocationTablePartial" />
+    </div>
+</section>

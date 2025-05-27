@@ -18,7 +18,7 @@
         <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
             <div class="navlink-left-rectangle"></div>
             <img class="nav-icon" src="~/images/dashboard-icon.svg" alt="dashboard-icon" />
-            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-actions="Index">
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")" asp-controller="Home" asp-action="Index">
                 <span>Dashboard</span>
             </a>
         </div>
@@ -40,13 +40,25 @@
                 <span>Events</span>
             </a>
         </div>   
+        
+        @if (User.IsInRole("Admin"))
+        {
+            @* INVOICE NAVLINK *@
+            <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")">
+                <div class="navlink-left-rectangle"></div>
+                <img class="nav-icon" src="~/images/invoice-icon.svg" alt="event-ticket-icon" />
+                <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="Invoice" asp-action="Index">
+                    <span>Invoices</span>
+                </a>
+            </div>
+        }
 
-        @* INVOICE NAVLINK *@
-        <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")">
+        @* LOCATION NAVLINK *@
+        <div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Location" ? "active" : "")">
             <div class="navlink-left-rectangle"></div>
-            <img class="nav-icon" src="~/images/invoice-icon.svg" alt="event-ticket-icon" />
-            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Invoice" ? "active" : "")" asp-controller="Invoice" asp-action="Index">
-                <span>Invoices</span>
+            <img class="nav-icon" src="~/images/location-icon.svg" alt="location-icon" />
+            <a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Location" ? "active" : "")" asp-controller="Location" asp-action="Index">
+                <span>Locations</span>
             </a>
         </div>
     </nav>

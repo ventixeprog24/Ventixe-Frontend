@@ -1,4 +1,4 @@
-﻿
+﻿@model List<BookingViewModel>
 
 @* BOOKING TABLE *@
 <table class="table-container">
@@ -10,42 +10,58 @@
             <th>Name</th>
             <th>Event</th>
             <th>Ticket Category</th>
-            <th>Price</th>
-            <th>Qty</th>
-            <th>Amount</th>
+            <th>Ticket Amount</th>
+            <th>Ticket Price</th>
+            <th>Total Price</th>
         </tr>
     </thead>
 
     @* TABLE BODY *@
     <tbody class="table-body-bookings">
-        <tr>
-            <td class="table-first-column">
-                <div class="text-date">{date}</div>
-                <div class="text-time">{Time}</div>
-            </td>
-            <td>
-                <div class="text-name">{user.Name}</div>
-            </td>
-            <td>
-                <div class="text-event-name">{event.Name}</div>
-                <div class="text-event-type">{event.Type?}</div>
-            </td>
-            <td>
-                <div class="ticket-category-tag">
-                    <div class="ticket-category-ellipse"></div>
-                    <div class="text-ticket-category">{event?.ticketCategory}</div>
-                </div>
-            </td>
-            <td>
-                <div class="text-price">{event.ticketCategory.Price}</div>
-            </td>
-            <td>
-                <div class="text-qty">{booking.ticketQty}</div>
-            </td>
-            <td class="table-last-column">
-                <div class="text-amount">{..Price * ..Amount}</div>
-            </td>
-        </tr>
+        @if (Model.Any())
+        {
+            @foreach (var booking in Model)
+            {
+                // AI SUGGESTED ONLCICK LINE IN TR TAG. TRIED DIFFERENT VERSIONS WITH ( asp-controller="Home" asp-actions="Index" )
+                // WHICH APPARENTLY DONT WORK ON TABLES OR TR TAGS.
+                <tr onclick="window.location.href='@Url.Action("BookingDetails", "Booking"/*, new { id = booking.Id }*/)'">
+                    <td class="table-first-column">
+                        <div class="text-date">@booking.EventDate.ToString("yyyy-mm-dd")</div>
+                        <div class="text-time">@booking.EventDate.ToString("HH:mm")</div>
+                    </td>
+                    <td>
+                        <div class="text-name">@booking.FirstName @booking.LastName</div>
+                    </td>
+                    <td>
+                        <div class="text-event-name">@booking.EventName</div>
+                    </td>
+                    <td>
+                        <div class="ticket-category-tag">
+                            <div class="ticket-category-ellipse"></div>
+                            <div class="text-ticket-category">{event?.ticketCategory}</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-price">@booking.TicketAmount</div>
+                    </td>
+                    <td>
+                        <div class="text-qty">@booking.TicketPrice</div>
+                    </td>
+                    <td class="table-last-column">
+                        <div class="text-amount">@booking.TotalPrice</div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7">No bookings found.</td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+
 

@@ -6,11 +6,14 @@ using Authentication.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Presentation.Services;
+using BookingServiceClient = BookingServiceProvider.BookingServiceContract.BookingServiceContractClient;
+using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
 using EventServiceContractClient = EventServiceProvider.EventContract.EventContractClient;
 using LocationServiceProvider;
 using EventServiceProvider;
+using LocationServiceContractClient = LocationServiceProvider.LocationServiceContract.LocationServiceContractClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +33,7 @@ builder.Services.AddIdentity<AppUserEntity, IdentityRole>(x =>
 builder.Services.ConfigureApplicationCookie(o =>
 {
     o.LoginPath = new PathString("/auth/Login");
+    o.AccessDeniedPath = new PathString("/unauthorized");
     o.ExpireTimeSpan = TimeSpan.FromDays(30);
     o.SlidingExpiration = true;
     o.Cookie.SameSite = SameSiteMode.None;
@@ -63,12 +67,24 @@ builder.Services.AddGrpcClient<LocationServiceContract.LocationServiceContractCl
 
 
 
+builder.Services.AddGrpcClient<BookingServiceClient>(o =>
+{
+    o.Address = new Uri(builder.Configuration["Grpc:BookingServiceProvider"]!);
+});
+
+builder.Services.AddGrpcClient<LocationServiceContractClient>(o =>
+{
+    o.Address = new Uri(builder.Configuration["Grpc:LocationServiceProvider"]!);
+});
+
 
 builder.Services.AddScoped<RoleHandler>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<InvoiceService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<LocationService>();
+builder.Services.AddScoped<BookingService>();
 builder.Services.AddScoped<IEventService, EventService>();
 
 var app = builder.Build();
