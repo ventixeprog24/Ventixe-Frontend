@@ -10,7 +10,6 @@ using BookingServiceClient = BookingServiceProvider.BookingServiceContract.Booki
 using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
-using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using EventServiceContractClient = EventServiceProvider.EventContract.EventContractClient;
 using LocationServiceProvider;
 using EventServiceProvider;
