@@ -12,6 +12,8 @@
         public string? BookingStatus { get; set; }
         public string? Category { get; set; }
         public string? Location { get; set; }
+        public string? LocationId { get; set; }
+        public int SeatCount { get; set; }
         public int TotalTickets { get; set; }
         public int TicketsSold { get; set; }
     }
