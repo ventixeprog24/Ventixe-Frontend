@@ -19,7 +19,7 @@ namespace Authentication.Services
             HeaderUserProfileDto headerViewModel = new()
             {
                 UserId = string.Empty,
-                FullName = "Failed to fetch name"
+                FullName = ""
             };
 
             var httpContext = _accessor.HttpContext;
