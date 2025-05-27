@@ -61,9 +61,19 @@ public class EventService(EventServiceContractClient eventService, CategoryServi
             };
     }
 
-    public Task<EventReply> DeleteEventAsync(string eventId)
+    public async Task<EventReply> DeleteEventAsync(string eventId)
     {
-        throw new NotImplementedException();
+        var reply = await _eventService.DeleteEventAsync(new DeleteEventRequest
+        {
+            EventId = eventId
+        });
+        return reply.StatusCode == 200
+            ? reply
+            : new EventReply
+            {
+                StatusCode = reply.StatusCode,
+                Message = reply.Message
+            };
     }
 
 

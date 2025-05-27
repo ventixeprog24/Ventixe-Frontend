@@ -56,11 +56,22 @@ namespace Presentation.Controllers
                 BookingStatus = response.Event.Status?.StatusName,
                 Category = response.Event.Category?.CategoryName,
                 Location = response.Event.Location?.Name,
+                LocationId = response.Event.Location?.Id,
+                SeatCount = response.Event.Location?.Seats?.Count ?? 0,
                 TotalTickets = response.Event.TotalTickets,
                 TicketsSold = response.Event.TicketsSold,
             };
 
             return View(model);
+        }
+
+        [HttpPost("Delete")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var response = await _eventService.DeleteEventAsync(id);
+            if (response.StatusCode != 200)
+                return BadRequest(response.Message);
+            return RedirectToAction("Index");
         }
 
         [HttpGet("Create")]
