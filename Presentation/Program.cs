@@ -10,10 +10,9 @@ using BookingServiceClient = BookingServiceProvider.BookingServiceContract.Booki
 using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
-using EventServiceContractClient = EventServiceProvider.EventContract.EventContractClient;
-using LocationServiceProvider;
-using EventServiceProvider;
 using LocationServiceContractClient = LocationServiceProvider.LocationServiceContract.LocationServiceContractClient;
+using EventServiceContractClient = EventServiceProvider.EventContract.EventContractClient;
+using EventServiceProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,10 +61,6 @@ builder.Services.AddGrpcClient<CategoryContract.CategoryContractClient>(o =>
     o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!));
 builder.Services.AddGrpcClient<StatusContract.StatusContractClient>(o =>
     o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!));
-builder.Services.AddGrpcClient<LocationServiceContract.LocationServiceContractClient>(o =>
-    o.Address = new Uri(builder.Configuration["Grpc:LocationServiceProvider"]!));
-
-
 
 builder.Services.AddGrpcClient<BookingServiceClient>(o =>
 {
