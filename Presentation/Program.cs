@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Presentation.Services;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
-using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using EventServiceContractClient = EventServiceProvider.EventContract.EventContractClient;
 using LocationServiceProvider;
 using EventServiceProvider;
