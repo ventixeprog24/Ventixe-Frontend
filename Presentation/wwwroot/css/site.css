@@ -1373,6 +1373,54 @@ a {
 .invoice-table-row {
     margin-top: 1rem;
     margin-bottom: 1rem;
+    border-top: 1px solid var(--input-border-color);
+}
+
+/*EVENTS*/
+.event-page {
+    margin-top: 1.5rem;
+}
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+.event-link, .event-link:hover {
+    width: 100%;
+    color: var(--gray-70);
+    text-decoration: none;
+}
+
+.event-card {
+    height:120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    font-size: 12px;
+
+    background-color: var(--card-background-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid var(--gray-30);
+}
+.event-column{
+    display: grid;
+    gap: 0.8rem;
+}
+.date{
+    gap: 0;
+}
+.event-category {
+    width: fit-content;
+    background-color: var(--primary-40);
+    border-radius: 12px;
+    padding: 5px 10px;
+    color: #262c4a;
+}
 }
 
 

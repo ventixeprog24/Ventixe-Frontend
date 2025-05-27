@@ -33,7 +33,9 @@
 		<Protobuf Include="Protos\booking.proto" GrpcServices="Client" />
 		<Protobuf Include="Protos\verification.proto" GrpcServices="Client" />
         <Protobuf Include="Protos\invoices.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\event.proto" GrpcServices="Client" />
 		<Protobuf Include="Protos\location.proto" GrpcServices="Client" />
+
 	</ItemGroup>
 
 </Project>

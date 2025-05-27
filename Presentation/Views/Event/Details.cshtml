@@ -1,0 +1,26 @@
+﻿@model EventViewModel;
+@{
+    ViewData["Title"] = Model.EventTitle;
+}
+
+@* EVENT HEADER *@
+<partial name="./Partials/EventPartials/_EventHeaderPartial" />
+
+
+<div class="event-page">
+    <div class="event-header">
+        <h1>@Model.EventTitle</h1>
+        <p>@Model.Description</p>
+    </div>
+    <div class="event-details">
+        <div class="event-image">
+            @*<img src="@Model.Image" alt="@Model.EventTitle" />*@
+            Image goes here
+        </div>
+        <div class="event-info">
+            <p><strong>Date:</strong> @Model.Date?.ToString("yyyy-MM-dd HH:mm")</p>
+            <p><strong>Location:</strong> @Model.Location</p>
+            <p><strong>Price:</strong> @(Model.Price == 0 ? "Free" : Model.Price.ToString("C"))</p>
+        </div>
+    </div>
+</div>

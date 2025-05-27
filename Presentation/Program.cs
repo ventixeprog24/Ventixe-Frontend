@@ -10,6 +10,10 @@ using BookingServiceClient = BookingServiceProvider.BookingServiceContract.Booki
 using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.UserProfileServiceClient;
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
+using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
+using EventServiceContractClient = EventServiceProvider.EventContract.EventContractClient;
+using LocationServiceProvider;
+using EventServiceProvider;
 using LocationServiceContractClient = LocationServiceProvider.LocationServiceContract.LocationServiceContractClient;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,6 +56,17 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
 {
     o.Address = new Uri(builder.Configuration["Grpc:VerificationServiceProvider"]!);
 });
+builder.Services.AddGrpcClient<EventServiceContractClient>(o =>
+    o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!)
+);
+builder.Services.AddGrpcClient<CategoryContract.CategoryContractClient>(o =>
+    o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!));
+builder.Services.AddGrpcClient<StatusContract.StatusContractClient>(o =>
+    o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!));
+builder.Services.AddGrpcClient<LocationServiceContract.LocationServiceContractClient>(o =>
+    o.Address = new Uri(builder.Configuration["Grpc:LocationServiceProvider"]!));
+
+
 
 builder.Services.AddGrpcClient<BookingServiceClient>(o =>
 {
@@ -71,6 +86,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<LocationService>();
 builder.Services.AddScoped<BookingService>();
+builder.Services.AddScoped<IEventService, EventService>();
 
 var app = builder.Build();
 
