@@ -7,9 +7,10 @@ using LocationServiceContractClient = LocationServiceProvider.LocationServiceCon
 
 namespace Presentation.Services
 {
-    public class LocationService(LocationServiceContractClient locationService)
+    public class LocationService(LocationServiceContractClient locationService, IEventService eventService)
     {
         private readonly LocationServiceContractClient _locationService = locationService;
+        private readonly IEventService _eventService = eventService;
 
         public async Task<LocationServiceResult> CreateLocation(LocationViewModel viewModel)
         {
@@ -25,10 +26,10 @@ namespace Presentation.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return new LocationServiceResult 
-                { 
-                    Succeeded = false, 
-                    ErrorMessage = "An error occurred while creating the location. Please try again lateVer." 
+                return new LocationServiceResult
+                {
+                    Succeeded = false,
+                    ErrorMessage = "An error occurred while creating the location. Please try again lateVer."
                 };
             }
         }
@@ -50,8 +51,8 @@ namespace Presentation.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return new LocationServiceResult<List<LocationViewModel>> 
-                { 
+                return new LocationServiceResult<List<LocationViewModel>>
+                {
                     Succeeded = false,
                     ErrorMessage = "An error occurred while retrieving the locations. Please try again later."
                 };
@@ -94,10 +95,10 @@ namespace Presentation.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return new LocationServiceResult 
-                { 
-                    Succeeded = false, 
-                    ErrorMessage = "An error occurred while updating the location. Try again later." 
+                return new LocationServiceResult
+                {
+                    Succeeded = false,
+                    ErrorMessage = "An error occurred while updating the location. Try again later."
                 };
             }
         }
@@ -106,6 +107,13 @@ namespace Presentation.Services
         {
             try
             {
+                var activeEvents = await CheckActiveEvents(id);
+                if (!activeEvents.Succeeded)
+                    return new LocationServiceResult { Succeeded = false,  ErrorMessage = activeEvents.ErrorMessage };
+
+                if (activeEvents.Result)
+                    return new LocationServiceResult { Succeeded = false,  ErrorMessage = "Location cannot be deleted due to assigned active events." };
+
                 var result = await _locationService.DeleteLocationAsync(new LocationByIdRequest { Id = id });
                 return result.Succeeded
                     ? new LocationServiceResult { Succeeded = true }
@@ -114,10 +122,34 @@ namespace Presentation.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
-                return new LocationServiceResult 
-                { 
-                    Succeeded = false, 
-                    ErrorMessage = "An error occurred while deleting the location. Try again later." 
+                return new LocationServiceResult
+                {
+                    Succeeded = false,
+                    ErrorMessage = "An error occurred while deleting the location. Try again later."
+                };
+            }
+        }
+
+        public async Task<LocationServiceResult<bool>> CheckActiveEvents(string locationId)
+        {
+            try
+            {
+                var result = await _eventService.GetAllEventsAsync();
+
+                var hasActiveEvents = result.Events.Any(x =>
+                     x.LocationId == locationId &&
+                     x.Status?.StatusName?.ToLower() == "active"
+                 );
+
+                return new LocationServiceResult<bool> { Succeeded = true, Result = hasActiveEvents };
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return new LocationServiceResult<bool>
+                {
+                    Succeeded = false,
+                    ErrorMessage = "An error occurred while checking for active events."
                 };
             }
         }

@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Presentation.Models.Locations;
 using Presentation.Services;
 
 namespace Presentation.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class LocationController(LocationService locationService) : Controller
     {
         private readonly LocationService _locationService = locationService;
@@ -84,8 +85,6 @@ namespace Presentation.Controllers
                 TempData["ErrorMessage"] = "The location ID is invalid. Please refresh the page and try again.";
                 return RedirectToAction(nameof(Index));
             }
-
-            // --- Kontakta Event för att bekräfta att inget aktivt event finns på location id??
 
             var deleted = await _locationService.DeleteLocation(id);
             if (!deleted.Succeeded)
