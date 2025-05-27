@@ -1,5 +1,8 @@
 ﻿@using Presentation.Controllers
 @model IEnumerable<EventViewModel>
+@using Authentication.Entities
+@using Microsoft.AspNetCore.Identity
+
 
 
 @* EVENT HEADER *@
@@ -21,7 +24,7 @@
                         <h4 class="event-title">@e.EventTitle</h4>
                         <div class="event-description">@e.Description</div>
                 </div>
-                <div class="event-column">
+                <div class="event-column date">
                         <div class="event-location">
                             <i class="fa-light fa-location-dot"></i>
                             @e.Location
@@ -50,4 +53,11 @@
 
         }
     </div>
-</div>
+@*     
+    @if (User.IsInRole("Admin"))
+    { *@
+        <a asp-controller="Event" asp-action="Create" class="btn">
+                Create Event
+        </a>
+@*     }
+ *@</div>

@@ -10,6 +10,8 @@ using UserProfileServiceClient = UserProfileServiceProvider.UserProfileService.U
 using VerificationServiceClient = VerificationServiceProvider.VerificationContract.VerificationContractClient;
 using InvoiceServiceContractClient = InvoiceServiceProvider.InvoiceServiceContract.InvoiceServiceContractClient;
 using EventServiceContractClient = EventServiceProvider.EventContract.EventContractClient;
+using LocationServiceProvider;
+using EventServiceProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +55,14 @@ builder.Services.AddGrpcClient<VerificationServiceClient>(o =>
 builder.Services.AddGrpcClient<EventServiceContractClient>(o =>
     o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!)
 );
+builder.Services.AddGrpcClient<CategoryContract.CategoryContractClient>(o =>
+    o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!));
+builder.Services.AddGrpcClient<StatusContract.StatusContractClient>(o =>
+    o.Address = new Uri(builder.Configuration["Grpc:EventServiceProvider"]!));
+builder.Services.AddGrpcClient<LocationServiceContract.LocationServiceContractClient>(o =>
+    o.Address = new Uri(builder.Configuration["Grpc:LocationServiceProvider"]!));
+
+
 
 
 builder.Services.AddScoped<RoleHandler>();

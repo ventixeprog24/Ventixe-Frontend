@@ -1057,6 +1057,7 @@ form button[type="submit"] {
     flex-direction: row;
     align-items: center;
     gap: 1rem;
+    font-size: 12px;
 
     background-color: var(--card-background-color);
     border-radius: 1rem;
@@ -1066,6 +1067,9 @@ form button[type="submit"] {
 .event-column{
     display: grid;
     gap: 0.8rem;
+}
+.date{
+    gap: 0;
 }
 .event-category {
     width: fit-content;
