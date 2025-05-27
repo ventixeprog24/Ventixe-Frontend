@@ -38,6 +38,6 @@ public class LoginController(AuthService authService) : Controller
     public async Task<IActionResult> LogOut()
     {
         await _authService.LogOutAsync();
-        return RedirectToAction("Index", "Login");
+        return RedirectToAction("Index", "Home");
     }
 }
