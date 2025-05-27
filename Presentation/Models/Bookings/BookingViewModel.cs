@@ -13,6 +13,8 @@
         public string PostalCode { get; set; } = null!;
         public string City { get; set; } = null!;
         public string EventName { get; set; } = null!;
+        public string ?LocationName { get; set; }
+        public int SeatCount { get; set; }
         public int TicketAmount { get; set; }
         public double TicketPrice { get; set; }
         public double TotalPrice { get; set; }
