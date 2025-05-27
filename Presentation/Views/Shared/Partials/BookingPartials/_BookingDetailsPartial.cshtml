@@ -60,14 +60,14 @@
     </thead>
     <tbody>
         <tr class="ticket-table-body">
-            <td>@Model.TicketPrice</td>
+            <td>@Model.TicketPrice kr</td>
             <td>@Model.TicketAmount</td>
-            <td>@Model.TotalPrice</td>
+            <td>@Model.TotalPrice kr</td>
         </tr>
     </tbody>
 </table>
 
-@* CANCEL BUTTON  *@
+@* CANCEL BUTTON *@
 <div class="cancel-btn-wrapper">
     @if (Model.EventDate > DateTime.UtcNow)
     {
@@ -88,23 +88,3 @@
         </div>
     }
 </div>
-
-@* MOVE TO EVENT CARD OR WHATEVER LATER *@
-<form asp-controller="Booking" asp-action="BookingForm" method="post">
-    <input type="hidden" asp-for=Id />
-    <input type="hidden" asp-for=UserId />
-    <input type="hidden" asp-for=EventId />
-    <input type="hidden" asp-for=FirstName />
-    <input type="hidden" asp-for=LastName />
-    <input type="hidden" asp-for=Email />
-    <input type="hidden" asp-for=PhoneNumber />
-    <input type="hidden" asp-for=Address />
-    <input type="hidden" asp-for=PostalCode />
-    <input type="hidden" asp-for=City />
-    <input type="hidden" asp-for=EventName />
-    <input type="hidden" asp-for=EventDate />
-    <input type="hidden" asp-for=TicketPrice />
-    <input type="hidden" asp-for=LocationName /> 
-    <input type="hidden" asp-for=SeatCount /> 
-    <button type="submit" class="book-event-btn">Proceed to booking</button>
-</form>

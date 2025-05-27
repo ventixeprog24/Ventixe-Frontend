@@ -1,5 +1,9 @@
 ﻿@model BookingViewModel
 
+@{
+    var soldOut = Model.TotalTickets - Model.TicketsSold == 0;
+}
+
 @* AI HJÄLP, JAG OCH JAVASCRIPT ÄR INTE VÄNNER *@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -27,13 +31,11 @@
         <div class="booking-event-info-wrapper">
             <h3 class="event-h3">Event</h3>
             <div class="date-time-wrapper">
-                <h5>@Model.EventDate.ToString("yyyy-mm-dd")</h5>
+                <h5>@Model.EventDate.ToString("yyyy-MM-dd")</h5>
                 <h5>@Model.EventDate.ToString("HH:mm")</h5>
             </div>
-
             <h3>@Model.EventName</h3>
             <h6>@Model.LocationName</h6>
-
         </div>
 
         @* USER INFO *@
@@ -70,8 +72,8 @@
     </div>
 
     @* TICKET INFO *@
-
     <h2>Ticket</h2>
+    <p>Seats Available:@(Model.TotalTickets - Model.TicketsSold == 0 ? " Sold out" : (Model.TotalTickets - Model.TicketsSold).ToString())  </p>
     <table class="ticket-table">
         <thead>
             <tr class="ticket-table-head">
@@ -82,31 +84,50 @@
         </thead>
         <tbody>
             <tr class="ticket-table-body">
-                <td>@Model.TicketPrice</td>
-                <td>
-                    <input asp-for=TicketAmount class="booking-ticketamount-input" type="number" value="1" />
-                    <span asp-validation-for="TicketAmount" class="error-message-create"></span>
-                </td>
-                <td id="totalPrice"><span>0</span></td>
+                <td>@Model.TicketPrice kr</td>
+                @if (!soldOut)
+                {
+                    <td>
+                        <input asp-for=TicketAmount class="booking-ticketamount-input" type="number" value="1" />
+                        <span asp-validation-for="TicketAmount" class="error-message-create"></span>
+                    </td>
+                }
+                else
+                {
+                    <td>None Avaliable</td>
+                }
+                <td id="totalPrice"><span>0</span> kr</td>
             </tr>
         </tbody>
     </table>
 
     @* BOOK EVENT BUTTON  *@
-    <div class="cancel-btn-wrapper">
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="UserId" />
-        <input type="hidden" asp-for="EventId" />
-        <input type="hidden" asp-for="FirstName" />
-        <input type="hidden" asp-for="LastName" />
-        <input type="hidden" asp-for="Email" />
-        <input type="hidden" asp-for="PhoneNumber" />
-        <input type="hidden" asp-for="Address" />
-        <input type="hidden" asp-for="PostalCode" />
-        <input type="hidden" asp-for="City" />
-        <input type="hidden" asp-for="EventName" />
-        <input type="hidden" asp-for="TicketPrice" />
-        <input type="hidden" asp-for="TotalPrice" />
-        <button type="submit" class="book-event-btn">Book Event</button>
-    </div>
+    @if (!soldOut)
+    {
+        <div class="book-event-btn-wrapper">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="EventId" />
+            <input type="hidden" asp-for="FirstName" />
+            <input type="hidden" asp-for="LastName" />
+            <input type="hidden" asp-for="Email" />
+            <input type="hidden" asp-for="PhoneNumber" />
+            <input type="hidden" asp-for="Address" />
+            <input type="hidden" asp-for="PostalCode" />
+            <input type="hidden" asp-for="City" />
+            <input type="hidden" asp-for="EventName" />
+            <input type="hidden" asp-for="TicketPrice" />
+            <input type="hidden" asp-for="TotalPrice" />
+            <input type="hidden" asp-for="TotalPrice" />
+            <input type="hidden" asp-for="TotalPrice" />
+            <button type="submit" class="book-event-btn">Book Event</button>
+        </div>
+    }
+    else
+    {
+        @* SOLD OUT *@
+        <div class="book-event-btn-wrapper">
+            <button type="button" class="book-event-btn-soldout" disabled><div>Sold Out</div></button>
+        </div>
+    }
 </form>
