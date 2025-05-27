@@ -18,11 +18,18 @@
             Image goes here
         </div>
         <div class="event-info">
-            <p><strong>Date:</strong> @Model.Date?.ToString("yyyy-MM-dd HH:mm")</p>
-            <p><strong>Location:</strong> @Model.Location</p>
-            <p><strong>Price:</strong> @(Model.Price == 0 ? "Free" : Model.Price.ToString("C"))</p>
+            <p>Date: @Model.Date?.ToString("yyyy-MM-dd HH:mm")</p>
+            <p>Location: @Model.Location</p>
+            <p>Price: @(Model.Price == 0 ? "Free" : Model.Price.ToString("C"))</p>
+            <p>Category: @Model.Category</p>
+            <p>Seats Available:@(Model.TotalTickets - Model.TicketsSold == 0 ? "Sold out" : (Model.TotalTickets - Model.TicketsSold).ToString())  </p>
         </div>
     </div>
+    <form asp-controller="Event" asp-action="Delete" method="post" novalidate">
+        <input type="hidden" name="id" value="@Model.EventId" />
+        <button type="submit" class="delete-event-btn">Delete Event</button>
+    </form>
+
     <form asp-controller="Booking" asp-action="BookingForm" method="post">
         <input type="hidden" asp-for=EventId />
         <input type="hidden" asp-for=EventTitle />
