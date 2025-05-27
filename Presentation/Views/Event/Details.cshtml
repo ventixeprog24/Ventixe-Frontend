@@ -25,24 +25,35 @@
             <p>Seats Available:@(Model.TotalTickets - Model.TicketsSold == 0 ? "Sold out" : (Model.TotalTickets - Model.TicketsSold).ToString())  </p>
         </div>
     </div>
+
     <form asp-controller="Event" asp-action="Delete" method="post" novalidate">
         <input type="hidden" name="id" value="@Model.EventId" />
         <button type="submit" class="delete-event-btn">Delete Event</button>
     </form>
+    <a asp-controller="Event" asp-action="Update" asp-route-id="@Model.EventId">Edit Event</a>
 
-    <form asp-controller="Booking" asp-action="BookingForm" method="post">
-        <input type="hidden" asp-for=EventId />
-        <input type="hidden" asp-for=EventTitle />
-        <input type="hidden" asp-for=EventId />
-        <input type="hidden" asp-for=Description />
-        <input type="hidden" asp-for=Date />
-        <input type="hidden" asp-for=Price />
-        <input type="hidden" asp-for=Category />
-        <input type="hidden" asp-for=Location />
-        <input type="hidden" asp-for=LocationId />
-        <input type="hidden" asp-for=SeatCount />
-        <input type="hidden" asp-for=TotalTickets />
-        <input type="hidden" asp-for=TicketsSold />
+
+    
+
+@if (Model.TotalTickets - Model.TicketsSold > 0)
+{
+    <form asp-controller="Booking" asp-action="BookingForm" method="post"> 
+        <input type="hidden" asp-for="EventId" />
+        <input type="hidden" asp-for="EventTitle" />
+        <input type="hidden" asp-for="Description" />
+        <input type="hidden" asp-for="Date" />
+        <input type="hidden" asp-for="Price" />
+        <input type="hidden" asp-for="Category" />
+        <input type="hidden" asp-for="Location" />
+        <input type="hidden" asp-for="LocationId" />
+        <input type="hidden" asp-for="SeatCount" />
+        <input type="hidden" asp-for="TotalTickets" />
+        <input type="hidden" asp-for="TicketsSold" />
         <button type="submit" class="book-event-btn">Proceed to booking</button>
     </form>
+}
+else
+{
+    <p class="">This event is sold out and cannot be booked.</p>
+}
 </div>

@@ -77,9 +77,16 @@ public class EventService(EventServiceContractClient eventService, CategoryServi
     }
 
 
-    public Task<EventReply> UpdateEventAsync(Event eventToUpdate)
+    public async Task<EventReply> UpdateEventAsync(Event eventToUpdate)
     {
-        throw new NotImplementedException();
+        var reply = await _eventService.UpdateEventAsync(eventToUpdate);
+        return reply.StatusCode == 200
+            ? reply
+            : new EventReply
+            {
+                StatusCode = reply.StatusCode,
+                Message = reply.Message
+            };
     }
 
     public async Task<GetAllCategoriesReply> GetAllCategoriesAsync()

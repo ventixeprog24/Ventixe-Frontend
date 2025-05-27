@@ -1421,7 +1421,7 @@ a {
     padding: 5px 10px;
     color: #262c4a;
 }
-.create-event-btn .delete-event-btn {
+.create-event-btn, .delete-event-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1434,6 +1434,7 @@ a {
     color: var(--gray-10);
     font-size: 1.2rem;
     margin: 1rem;
+    text-decoration: none;
 }
 
 
