@@ -553,7 +553,7 @@ html, body {
     padding: 1.5rem 0.5rem;
 }
 
-.table-body-bookings:hover {
+.table-body-bookings tr:hover {
     background-color: var(--gray-20);
     transition: background-color 0.2s ease;
     cursor: pointer;
@@ -826,7 +826,7 @@ html, body {
 }
 
     .cancel-btn-past-date div {
-        color: var(--red-border);
+        color: var(--pink-100);
         font-size: 1.2rem;
     }
 
@@ -869,26 +869,36 @@ html, body {
     border-radius: 1rem;
 }
 
-.booking-form h6 {
-    color: var(--cool-gray-60);
-    font-weight: 300;
-    margin-top: 0.2rem;
-    margin-bottom: 0.2rem;
-}
-.booking-form h5 {
-    color: var(--cool-gray-70);
-    font-weight: 400;
-    margin-bottom: 0.2rem;
-}
+    .booking-form h6 {
+        color: var(--cool-gray-60);
+        font-weight: 300;
+        margin-top: 0.2rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .booking-form h5 {
+        color: var(--cool-gray-70);
+        font-weight: 400;
+        margin-bottom: 0.2rem;
+    }
 
 .create-booking-h1 {
     display: flex;
     justify-content: center;
     margin-bottom: 3rem;
 }
+
 .user-h3-create {
     padding-bottom: 0.5rem;
     margin-left: 1rem;
+}
+
+.book-event-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
 }
 
 .book-event-btn {
@@ -901,6 +911,20 @@ html, body {
     color: var(--gray-10);
     font-size: 1.2rem;
 }
+
+.book-event-btn-soldout {
+    background-color: var(--gray-20);
+    border-radius: 1rem;
+    height: 3rem;
+    width: 16rem;
+    border: none;
+    color: var(--gray-10);
+    font-size: 1.2rem;
+}
+
+    .book-event-btn-soldout div {
+        color: var(--pink-100);
+    }
 
 .book-event-btn:hover {
     background-color: var(--pink-90);
@@ -918,7 +942,7 @@ html, body {
     padding-right: 10px;
 }
 
-.error-message-create{
+.error-message-create {
     font-size: 0.9rem;
     color: var(--red-border);
 }
@@ -1388,6 +1412,7 @@ a {
     align-items: center;
     gap: 1.5rem;
 }
+
 .event-link, .event-link:hover {
     width: 100%;
     color: var(--gray-70);
@@ -1395,25 +1420,27 @@ a {
 }
 
 .event-card {
-    height:120px;
+    height: 120px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 1rem;
     font-size: 12px;
-
     background-color: var(--card-background-color);
     border-radius: 1rem;
     padding: 1.5rem;
     border: 1px solid var(--gray-30);
 }
-.event-column{
+
+.event-column {
     display: grid;
     gap: 0.8rem;
 }
-.date{
+
+.date {
     gap: 0;
 }
+
 .event-category {
     width: fit-content;
     background-color: var(--primary-40);
@@ -1421,6 +1448,7 @@ a {
     padding: 5px 10px;
     color: #262c4a;
 }
+
 .create-event-btn .delete-event-btn {
     display: flex;
     align-items: center;
