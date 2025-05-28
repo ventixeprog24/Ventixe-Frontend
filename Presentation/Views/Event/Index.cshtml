@@ -53,11 +53,12 @@
 
         }
     </div>
-@*     
+    
     @if (User.IsInRole("Admin"))
-    { *@
-        <a asp-controller="Event" asp-action="Create" class="create-event-btn">
+    {
+
+            <a asp-controller="Event" asp-action="Create" class="create-event-btn">
                 Create Event
-        </a>
-@*     }
- *@</div>
+            </a>
+    }
+ </div>

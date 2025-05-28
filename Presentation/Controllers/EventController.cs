@@ -140,5 +140,82 @@ namespace Presentation.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet("Update/{id}")]
+        public async Task<IActionResult> Update(string id)
+        {
+            var response = await _eventService.GetEventByIdAsync(id);
+            var categories = await _eventService.GetAllCategoriesAsync();
+            var locations = await _eventService.GetAllLocationsAsync();
+            var statuses = await _eventService.GetAllStatusesAsync();
+
+            if (response.Event == null)
+            {
+                return NotFound();
+            }
+
+            var model = new CreateEventViewModel
+            {
+                EventTitle = response.Event.EventTitle,
+                Description = response.Event.Description,
+                Date = response.Event.Date?.ToDateTime(),
+                Price = response.Event.Price,
+                TotalTickets = response.Event.TotalTickets,
+                SelectedCategoryId = response.Event.Category?.CategoryId,
+                SelectedLocationId = response.Event.Location?.Id,
+                SelectedStatusId = response.Event.Status?.StatusId,
+                Categories = categories.Categories.Select(c => new SelectListItem
+                {
+                    Value = c.CategoryId,
+                    Text = c.CategoryName
+                }).ToList(),
+                Locations = locations.Locations.Select(l => new SelectListItem
+                {
+                    Value = l.Id,
+                    Text = l.Name
+                }).ToList(),
+                Statuses = statuses.Statuses.Select(s => new SelectListItem
+                {
+                    Value = s.StatusId,
+                    Text = s.StatusName
+                }).ToList()
+            };
+
+            return View(model); 
+        }
+
+        [HttpPost("Update/{id}")]
+        public async Task<IActionResult> Update(string id, CreateEventViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+            var protoEvent = new Event
+            {
+                EventId = id,
+                EventTitle = model.EventTitle,
+                Description = model.Description,
+                Date = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(model.Date?.ToUniversalTime() ?? DateTime.UtcNow),
+                Price = model.Price,
+                Location = new LocationServiceProvider.Location
+                {
+                    Id = model.SelectedLocationId,
+                },
+                TotalTickets = model.TotalTickets,
+                TicketsSold = model.TicketsSold,
+                Status = new Status
+                {
+                    StatusId = model.SelectedStatusId,
+                },
+                Category = new Category
+                {
+                    CategoryId = model.SelectedCategoryId,
+                }
+            };
+            var response = await _eventService.UpdateEventAsync(protoEvent);
+            if (response.StatusCode != 200)
+                return BadRequest(response.Message);
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

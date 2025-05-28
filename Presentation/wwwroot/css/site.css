@@ -1448,8 +1448,7 @@ a {
     padding: 5px 10px;
     color: #262c4a;
 }
-
-.create-event-btn .delete-event-btn {
+.create-event-btn, .event-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1462,10 +1461,11 @@ a {
     color: var(--gray-10);
     font-size: 1.2rem;
     margin: 1rem;
+    text-decoration: none;
 }
 
 
-.create-event-btn:hover .delete-event-btn:hover {
+.create-event-btn:hover .event-btn:hover {
     background-color: var(--pink-90);
     transition: background-color 0.2s ease;
 }

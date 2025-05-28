@@ -1,0 +1,66 @@
+﻿@model CreateEventViewModel;
+
+@{
+    ViewData["Title"] = "Create Event";
+    Layout = "_Layout";
+}
+
+<div id="login" class="card">
+    <div class="card-header">
+        <h4 class="card-title">Update Event</h4>
+        <p>
+            @ViewBag?.ErrorMessage
+        </p>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-action="Update" asp-controller="Event" novalidate>
+            <input type="hidden" name="returnUrl" value="@ViewBag?.ReturnUrl" />
+            <div class="form-group">
+                <label asp-for="EventTitle" class="form-label"></label>
+                <input asp-for="EventTitle" class="form-input" />
+                <span asp-validation-for="EventTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-input" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="form-label"></label>
+                <input asp-for="Date" class="form-input" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-input" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalTickets" class="form-label"></label>
+                <input asp-for="TotalTickets" class="form-input" />
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedCategoryId">Category</label>
+                <select asp-for="SelectedCategoryId" asp-items="Model.Categories" class="form-control">
+                    <option value="">-- Select Category --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedStatusId">Status</label>
+                <select asp-for="SelectedStatusId" asp-items="Model.Statuses" class="form-control">
+                    <option value="">-- Select Status --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedLocationId">Location</label>
+                <select asp-for="SelectedLocationId" asp-items="Model.Locations" class="form-control">
+                    <option value="">-- Select Location --</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Event</button>
+
+        </form>
+
+    </div>
+</div>
