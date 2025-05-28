@@ -180,7 +180,7 @@ namespace Presentation.Controllers
                 }).ToList()
             };
 
-            return View(model); // It should render Update.cshtml
+            return View(model); 
         }
 
         [HttpPost("Update/{id}")]
