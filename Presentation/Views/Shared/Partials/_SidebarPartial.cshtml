@@ -64,6 +64,15 @@
 				</a>
 			</div>
 		}
+
+		@* FEEDBACK NAVLINK *@
+		<div class="navlink-wrapper @(ViewContext.RouteData.Values["controller"]?.ToString() == "Feedback" ? "active" : "")">
+			<div class="navlink-left-rectangle"></div>
+			<img class="nav-icon" src="~/images/feedback-icon.svg" alt="feedback-icon" />
+			<a class="nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Feedback" ? "active" : "")" asp-controller="Feedback" asp-action="Index">
+				<span>Feedback</span>
+			</a>
+		</div>
 	</nav>
 	<footer>
 		@* SIGNOUT BUTTON *@
